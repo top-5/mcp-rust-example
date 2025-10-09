@@ -34,6 +34,12 @@ pub struct McpExampleServer {
     tool_router: ToolRouter<Self>,
 }
 
+impl Default for McpExampleServer {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 #[tool_router(router = tool_router)]
 impl McpExampleServer {
     pub fn new() -> Self {

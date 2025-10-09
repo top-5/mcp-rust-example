@@ -68,7 +68,7 @@ fn start_server(host: String, port: u16) -> anyhow::Result<()> {
 
     // Start the server process
     let mut cmd = Command::new("cargo");
-    cmd.args(&[
+    cmd.args([
         "run",
         "--bin",
         "mcp-server",
@@ -105,7 +105,7 @@ fn start_server(host: String, port: u16) -> anyhow::Result<()> {
         println!("   PID: {}", pid);
         println!("   Logs: logs/mcp-server.log");
         println!("   Errors: logs/mcp-server-error.log");
-        println!("");
+        println!();
         println!("💡 Use 'cargo run --bin launcher status' to check server status");
         println!("💡 Use 'cargo run --bin launcher stop' to stop the server");
     } else {
@@ -145,7 +145,7 @@ fn stop_server() -> anyhow::Result<()> {
     #[cfg(not(windows))]
     {
         let output = Command::new("kill")
-            .args(&["-TERM", &pid.to_string()])
+            .args(["-TERM", &pid.to_string()])
             .output()?;
 
         if output.status.success() {
@@ -174,7 +174,7 @@ fn check_server_status() -> anyhow::Result<()> {
             // Check if we can reach the server
             println!("   Checking connectivity...");
             match std::process::Command::new("powershell")
-                .args(&["-c", "try { (Invoke-WebRequest -Uri 'http://127.0.0.1:8080/mcp' -Method GET -TimeoutSec 5).StatusCode } catch { 'Failed' }"])
+                .args(["-c", "try { (Invoke-WebRequest -Uri 'http://127.0.0.1:8080/mcp' -Method GET -TimeoutSec 5).StatusCode } catch { 'Failed' }"])
                 .output() {
                 Ok(output) => {
                     let response_str = String::from_utf8_lossy(&output.stdout);
@@ -221,7 +221,7 @@ fn is_server_running() -> anyhow::Result<bool> {
 
     #[cfg(not(windows))]
     {
-        let output = Command::new("ps").args(&["-p", pid]).output()?;
+        let output = Command::new("ps").args(["-p", pid]).output()?;
 
         Ok(output.status.success())
     }

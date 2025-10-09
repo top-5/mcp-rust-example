@@ -91,10 +91,10 @@ async fn main() -> Result<()> {
         })
         .await?;
 
-    if let Some(content) = get_result.content.first() {
-        if let Some(text) = content.as_text() {
-            tracing::info!("📊 {}", text.text);
-        }
+    if let Some(content) = get_result.content.first()
+        && let Some(text) = content.as_text()
+    {
+        tracing::info!("📊 {}", text.text);
     }
 
     // Increment counter
@@ -107,10 +107,10 @@ async fn main() -> Result<()> {
             })
             .await?;
 
-        if let Some(content) = inc_result.content.first() {
-            if let Some(text) = content.as_text() {
-                tracing::info!("✅ {}", text.text);
-            }
+        if let Some(content) = inc_result.content.first()
+            && let Some(text) = content.as_text()
+        {
+            tracing::info!("✅ {}", text.text);
         }
     }
 
