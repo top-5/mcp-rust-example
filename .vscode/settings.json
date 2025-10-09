@@ -1,9 +1,7 @@
 {
-  "mcp": {
-    "servers": {
-      "rustexam": {
-        "url": "http://127.0.0.1:8080/mcp"
-      }
+    "chat.mcp.serverSampling": {
+        "mcp-rust-example/.vscode/mcp.json: rustexam": {
+            "allowedDuringChat": true
+        }
     }
-  }
 }

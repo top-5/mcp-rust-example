@@ -1,0 +1,38 @@
+# Set default line ending behavior to Unix (LF)
+* text=auto eol=lf
+
+# Shell scripts should be executable and use LF
+*.sh text eol=lf
+
+# Ensure Windows files use CRLF when checked out on Windows
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+
+# Rust files
+*.rs text eol=lf diff=rust
+Cargo.toml text eol=lf
+Cargo.lock text eol=lf
+
+# Config files
+*.ini text eol=lf
+*.toml text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+
+# Documentation
+*.md text eol=lf
+LICENSE text eol=lf
+README text eol=lf
+
+# Git files
+.gitignore text eol=lf
+.gitattributes text eol=lf

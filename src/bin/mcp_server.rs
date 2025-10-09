@@ -8,8 +8,9 @@ use rmcp::{
 };
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 use clap::Parser;
-use axum::{response::Html, Json};
+use axum::{response::Html, Json, middleware};
 use serde_json::json;
+use mcp_rust_example::auth::{AuthConfig, auth_middleware};
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -71,6 +72,66 @@ impl McpExampleServer {
         Ok(CallToolResult::success(vec![Content::text(
             "Counter reset to 0".to_string()
         )]))
+    }
+
+    /// Test sampling by asking the LLM to say "Hi"
+    #[tool(description = "Test MCP sampling by asking the connected LLM to say 'Hi'")]
+    pub async fn test_sampling(
+        &self,
+        context: rmcp::service::RequestContext<rmcp::service::RoleServer>,
+    ) -> Result<CallToolResult, ErrorData> {
+        tracing::info!("🔔 Sampling request initiated - asking LLM to say Hi");
+        
+        // Request the client to run an LLM completion
+        let response = context
+            .peer
+            .create_message(CreateMessageRequestParam {
+                messages: vec![SamplingMessage {
+                    role: Role::User,
+                    content: Content::text("Please say 'Hi' and tell me what model you are."),
+                }],
+                model_preferences: Some(ModelPreferences {
+                    hints: Some(vec![
+                        ModelHint {
+                            name: Some("gpt-4".to_string()),
+                        },
+                        ModelHint {
+                            name: Some("claude".to_string()),
+                        },
+                    ]),
+                    cost_priority: Some(0.3),
+                    speed_priority: Some(0.8),
+                    intelligence_priority: Some(0.7),
+                }),
+                system_prompt: Some("You are a helpful assistant testing MCP sampling.".to_string()),
+                include_context: Some(ContextInclusion::None),
+                temperature: Some(0.7),
+                max_tokens: 150,
+                stop_sequences: None,
+                metadata: None,
+            })
+            .await
+            .map_err(|e| {
+                ErrorData::new(
+                    ErrorCode::INTERNAL_ERROR,
+                    format!("Sampling request failed: {}", e),
+                    None,
+                )
+            })?;
+
+        tracing::info!("✅ Sampling response received from model: {}", response.model);
+
+        Ok(CallToolResult::success(vec![Content::text(format!(
+            "📡 MCP Sampling Test Results:\n\nModel used: {}\nStop reason: {}\n\nResponse:\n{}",
+            response.model,
+            response.stop_reason.unwrap_or_else(|| "unknown".to_string()),
+            response
+                .message
+                .content
+                .as_text()
+                .map(|t| &t.text)
+                .unwrap_or(&"No text response".to_string())
+        ))]))
     }
 }
 
@@ -220,6 +281,22 @@ async fn main() -> anyhow::Result<()> {
     tracing::info!("Starting MCP Rust Example Server...");
     tracing::info!("Using official Rust MCP SDK from https://github.com/modelcontextprotocol/rust-sdk");
 
+    // Load authentication configuration
+    let auth_config = match AuthConfig::load() {
+        Ok(config) => {
+            tracing::info!("🔐 Authentication enabled with {} authorized users", config.authorized_tokens.len());
+            Arc::new(config)
+        },
+        Err(e) => {
+            tracing::warn!("⚠️  Failed to load auth config: {}. Running WITHOUT authentication!", e);
+            tracing::warn!("⚠️  To enable authentication, create etc/config.ini using token-manager");
+            Arc::new(AuthConfig {
+                jwt_secret: String::new(),
+                authorized_tokens: std::collections::HashMap::new(),
+            })
+        }
+    };
+
     let bind_address = format!("{}:{}", args.host, args.port);
 
     // Create the MCP service using the official SDK
@@ -231,12 +308,27 @@ async fn main() -> anyhow::Result<()> {
 
     // Create axum router with both MCP service and web routes
     // Note: Avoiding root route "/" to prevent MCP client confusion
+    // MCP routes require authentication, web routes are public
+    let has_auth = !auth_config.authorized_tokens.is_empty();
+    
+    let mcp_router = if has_auth {
+        axum::Router::new()
+            .nest_service("/mcp", service)
+            .layer(middleware::from_fn_with_state(
+                auth_config.clone(),
+                auth_middleware
+            ))
+    } else {
+        axum::Router::new()
+            .nest_service("/mcp", service)
+    };
+
     let app = axum::Router::new()
         .route("/health", axum::routing::get(health_check))
         .route("/api/status", axum::routing::get(api_status))
         .route("/dashboard", axum::routing::get(dashboard))
         .route("/web", axum::routing::get(home_page))  // Move home to /web to avoid conflict
-        .nest_service("/mcp", service);
+        .merge(mcp_router);
 
     // Start the server
     let listener = tokio::net::TcpListener::bind(&bind_address).await?;
@@ -245,11 +337,20 @@ async fn main() -> anyhow::Result<()> {
     tracing::info!("📋 MCP Protocol:");
     tracing::info!("   Endpoint: http://{}/mcp", bind_address);
     tracing::info!("   Tools: increment, get_counter, reset_counter");
+    if has_auth {
+        tracing::info!("   🔐 Authentication: ENABLED (Bearer token required)");
+    } else {
+        tracing::info!("   ⚠️  Authentication: DISABLED (no users configured)");
+    }
     tracing::info!("🌐 Web Endpoints:");
     tracing::info!("   Home: http://{}/web", bind_address);
     tracing::info!("   Health: http://{}/health", bind_address);
     tracing::info!("   Dashboard: http://{}/dashboard", bind_address);
     tracing::info!("");
+    if !has_auth {
+        tracing::info!("💡 To enable authentication:");
+        tracing::info!("   cargo run --bin token-manager add <username>");
+    }
     tracing::info!("💡 VS Code MCP: Already configured as mcp_rustexam_* tools");
     tracing::info!("💡 Web Browser: Visit http://{}/web for web interface", bind_address);
     tracing::info!("");

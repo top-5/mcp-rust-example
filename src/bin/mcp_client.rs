@@ -1,10 +1,11 @@
 use rmcp::{
     model::*,
-    transport::streamable_http_client::StreamableHttpClientTransport,
+    transport::StreamableHttpClientTransport,
     ServiceExt,
 };
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 use clap::Parser;
+use anyhow::Result;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -15,7 +16,7 @@ struct Args {
 }
 
 #[tokio::main]
-async fn main() -> anyhow::Result<()> {
+async fn main() -> Result<()> {
     let args = Args::parse();
 
     // Initialize logging
@@ -29,8 +30,8 @@ async fn main() -> anyhow::Result<()> {
 
     tracing::info!("🔌 Connecting to MCP server at: {}", args.url);
 
-    // Create transport
-    let transport = StreamableHttpClientTransport::from_uri(&args.url);
+    // Create transport using the from_uri convenience method
+    let transport = StreamableHttpClientTransport::from_uri(args.url.clone());
 
     // Create client info
     let client_info = ClientInfo {

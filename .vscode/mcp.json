@@ -2,8 +2,10 @@
 	"servers": {
 		"rustexam": {
 			"url": "http://127.0.0.1:8080/mcp",
-			"type": "http"
+			"type": "http",
+			"headers": {
+				"Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0dXNlciIsImlhdCI6MTc1OTk3OTI3MiwiZXhwIjo0MTAyNDQ0Nzk5LCJpc3MiOiJtY3AtcnVzdC1leGFtcGxlIn0.vhIIV-J_5BhMYsDb3g2lyGWTbMrsPX--Ie4b4xs-s4U"
+			}
 		}
-	},
-	"inputs": []
+	}
 }

@@ -13,7 +13,7 @@ rmcp = { git = "https://github.com/modelcontextprotocol/rust-sdk", features = [
     "server",
     "client", 
     "transport-streamable-http-server",
-    "transport-streamable-http-client"
+    "transport-streamable-http-client-reqwest"  # Use reqwest client for convenience methods
 ] }
 
 # Required dependencies for MCP server
@@ -26,6 +26,14 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 axum = "0.7"
 clap = { version = "4.0", features = ["derive"] }
 chrono = { version = "0.4", features = ["serde"] }
+reqwest = { version = "0.12", default-features = false, features = ["rustls-tls"] }
+
+# Authentication and configuration
+jsonwebtoken = "9.0"
+configparser = "3.1"
+tower = "0.5"
+tower-http = { version = "0.6", features = ["trace"] }
+rand = "0.9"
 
 [[bin]]
 name = "mcp-server"
@@ -34,3 +42,7 @@ path = "src/bin/mcp_server.rs"
 [[bin]]
 name = "launcher"
 path = "src/bin/launcher.rs"
+
+[[bin]]
+name = "token-manager"
+path = "src/bin/token_manager.rs"
