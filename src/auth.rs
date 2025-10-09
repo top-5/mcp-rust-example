@@ -43,10 +43,10 @@ impl AuthConfig {
         // Get all keys from auth section
         if let Some(auth_map) = conf.get_map_ref().get("auth") {
             for (username, token) in auth_map.iter() {
-                if !username.starts_with('#') {
-                    if let Some(token_value) = token {
-                        authorized_tokens.insert(username.to_string(), token_value.to_string());
-                    }
+                if !username.starts_with('#')
+                    && let Some(token_value) = token
+                {
+                    authorized_tokens.insert(username.to_string(), token_value.to_string());
                 }
             }
         }
