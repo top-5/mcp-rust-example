@@ -1,7 +1,7 @@
 [package]
 name = "mcp-rust-example"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 license = "Apache-2.0"
 authors = ["Top-5 <top-5@noname.org>"]
 description = "MCP (Model Context Protocol) HTTP server implementation using the official Rust SDK"
