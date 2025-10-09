@@ -1,16 +1,19 @@
+use axum::{Json, middleware, response::Html};
+use clap::Parser;
+use mcp_rust_example::auth::{AuthConfig, auth_middleware};
+use rmcp::{
+    ServerHandler,
+    handler::server::router::tool::ToolRouter,
+    model::*,
+    tool, tool_handler, tool_router,
+    transport::streamable_http_server::{
+        StreamableHttpService, session::local::LocalSessionManager,
+    },
+};
+use serde_json::json;
 use std::sync::Arc;
 use tokio::sync::Mutex;
-use rmcp::{
-    model::*,
-    handler::server::router::tool::ToolRouter,
-    transport::streamable_http_server::{StreamableHttpService, session::local::LocalSessionManager},
-    tool, tool_handler, tool_router, ServerHandler,
-};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
-use clap::Parser;
-use axum::{response::Html, Json, middleware};
-use serde_json::json;
-use mcp_rust_example::auth::{AuthConfig, auth_middleware};
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -18,7 +21,7 @@ struct Args {
     /// Port to bind the server to
     #[arg(short, long, default_value = "8080")]
     port: u16,
-    
+
     /// Host to bind the server to
     #[arg(long, default_value = "127.0.0.1")]
     host: String,
@@ -46,9 +49,10 @@ impl McpExampleServer {
         let mut counter = self.counter.lock().await;
         *counter += 1;
         let value = *counter;
-        
+
         Ok(CallToolResult::success(vec![Content::text(format!(
-            "Counter incremented to: {}", value
+            "Counter incremented to: {}",
+            value
         ))]))
     }
 
@@ -57,9 +61,10 @@ impl McpExampleServer {
     pub async fn get_counter(&self) -> Result<CallToolResult, ErrorData> {
         let counter = self.counter.lock().await;
         let value = *counter;
-        
+
         Ok(CallToolResult::success(vec![Content::text(format!(
-            "Current counter value: {}", value
+            "Current counter value: {}",
+            value
         ))]))
     }
 
@@ -68,9 +73,9 @@ impl McpExampleServer {
     pub async fn reset_counter(&self) -> Result<CallToolResult, ErrorData> {
         let mut counter = self.counter.lock().await;
         *counter = 0;
-        
+
         Ok(CallToolResult::success(vec![Content::text(
-            "Counter reset to 0".to_string()
+            "Counter reset to 0".to_string(),
         )]))
     }
 
@@ -81,7 +86,7 @@ impl McpExampleServer {
         context: rmcp::service::RequestContext<rmcp::service::RoleServer>,
     ) -> Result<CallToolResult, ErrorData> {
         tracing::info!("🔔 Sampling request initiated - asking LLM to say Hi");
-        
+
         // Request the client to run an LLM completion
         let response = context
             .peer
@@ -103,7 +108,9 @@ impl McpExampleServer {
                     speed_priority: Some(0.8),
                     intelligence_priority: Some(0.7),
                 }),
-                system_prompt: Some("You are a helpful assistant testing MCP sampling.".to_string()),
+                system_prompt: Some(
+                    "You are a helpful assistant testing MCP sampling.".to_string(),
+                ),
                 include_context: Some(ContextInclusion::None),
                 temperature: Some(0.7),
                 max_tokens: 150,
@@ -119,12 +126,17 @@ impl McpExampleServer {
                 )
             })?;
 
-        tracing::info!("✅ Sampling response received from model: {}", response.model);
+        tracing::info!(
+            "✅ Sampling response received from model: {}",
+            response.model
+        );
 
         Ok(CallToolResult::success(vec![Content::text(format!(
             "📡 MCP Sampling Test Results:\n\nModel used: {}\nStop reason: {}\n\nResponse:\n{}",
             response.model,
-            response.stop_reason.unwrap_or_else(|| "unknown".to_string()),
+            response
+                .stop_reason
+                .unwrap_or_else(|| "unknown".to_string()),
             response
                 .message
                 .content
@@ -159,7 +171,8 @@ impl ServerHandler for McpExampleServer {
 
 // Web route handlers
 async fn home_page() -> Html<&'static str> {
-    Html(r#"
+    Html(
+        r#"
 <!DOCTYPE html>
 <html>
 <head>
@@ -194,7 +207,8 @@ async fn home_page() -> Html<&'static str> {
     <p><strong>Web Browser:</strong> You're here! Try the endpoints above</p>
 </body>
 </html>
-    "#)
+    "#,
+    )
 }
 
 async fn health_check() -> Json<serde_json::Value> {
@@ -223,7 +237,8 @@ async fn api_status() -> Json<serde_json::Value> {
 }
 
 async fn dashboard() -> Html<&'static str> {
-    Html(r#"
+    Html(
+        r#"
 <!DOCTYPE html>
 <html>
 <head>
@@ -262,13 +277,14 @@ async fn dashboard() -> Html<&'static str> {
     </div>
 </body>
 </html>
-    "#)
+    "#,
+    )
 }
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     let args = Args::parse();
-    
+
     // Initialize logging
     tracing_subscriber::registry()
         .with(
@@ -279,17 +295,27 @@ async fn main() -> anyhow::Result<()> {
         .init();
 
     tracing::info!("Starting MCP Rust Example Server...");
-    tracing::info!("Using official Rust MCP SDK from https://github.com/modelcontextprotocol/rust-sdk");
+    tracing::info!(
+        "Using official Rust MCP SDK from https://github.com/modelcontextprotocol/rust-sdk"
+    );
 
     // Load authentication configuration
     let auth_config = match AuthConfig::load() {
         Ok(config) => {
-            tracing::info!("🔐 Authentication enabled with {} authorized users", config.authorized_tokens.len());
+            tracing::info!(
+                "🔐 Authentication enabled with {} authorized users",
+                config.authorized_tokens.len()
+            );
             Arc::new(config)
-        },
+        }
         Err(e) => {
-            tracing::warn!("⚠️  Failed to load auth config: {}. Running WITHOUT authentication!", e);
-            tracing::warn!("⚠️  To enable authentication, create etc/config.ini using token-manager");
+            tracing::warn!(
+                "⚠️  Failed to load auth config: {}. Running WITHOUT authentication!",
+                e
+            );
+            tracing::warn!(
+                "⚠️  To enable authentication, create etc/config.ini using token-manager"
+            );
             Arc::new(AuthConfig {
                 jwt_secret: String::new(),
                 authorized_tokens: std::collections::HashMap::new(),
@@ -310,30 +336,32 @@ async fn main() -> anyhow::Result<()> {
     // Note: Avoiding root route "/" to prevent MCP client confusion
     // MCP routes require authentication, web routes are public
     let has_auth = !auth_config.authorized_tokens.is_empty();
-    
+
     let mcp_router = if has_auth {
         axum::Router::new()
             .nest_service("/mcp", service)
             .layer(middleware::from_fn_with_state(
                 auth_config.clone(),
-                auth_middleware
+                auth_middleware,
             ))
     } else {
-        axum::Router::new()
-            .nest_service("/mcp", service)
+        axum::Router::new().nest_service("/mcp", service)
     };
 
     let app = axum::Router::new()
         .route("/health", axum::routing::get(health_check))
         .route("/api/status", axum::routing::get(api_status))
         .route("/dashboard", axum::routing::get(dashboard))
-        .route("/web", axum::routing::get(home_page))  // Move home to /web to avoid conflict
+        .route("/web", axum::routing::get(home_page)) // Move home to /web to avoid conflict
         .merge(mcp_router);
 
     // Start the server
     let listener = tokio::net::TcpListener::bind(&bind_address).await?;
-    
-    tracing::info!("🚀 Combined MCP + Web Server running on http://{}", bind_address);
+
+    tracing::info!(
+        "🚀 Combined MCP + Web Server running on http://{}",
+        bind_address
+    );
     tracing::info!("📋 MCP Protocol:");
     tracing::info!("   Endpoint: http://{}/mcp", bind_address);
     tracing::info!("   Tools: increment, get_counter, reset_counter");
@@ -352,7 +380,10 @@ async fn main() -> anyhow::Result<()> {
         tracing::info!("   cargo run --bin token-manager add <username>");
     }
     tracing::info!("💡 VS Code MCP: Already configured as mcp_rustexam_* tools");
-    tracing::info!("💡 Web Browser: Visit http://{}/web for web interface", bind_address);
+    tracing::info!(
+        "💡 Web Browser: Visit http://{}/web for web interface",
+        bind_address
+    );
     tracing::info!("");
     tracing::info!("Press Ctrl+C to shutdown");
 

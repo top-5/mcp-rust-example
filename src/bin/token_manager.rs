@@ -1,8 +1,8 @@
-use anyhow::{Result, Context};
-use chrono::{Utc, TimeZone};
+use anyhow::{Context, Result};
+use chrono::{TimeZone, Utc};
 use clap::{Parser, Subcommand};
 use configparser::ini::Ini;
-use jsonwebtoken::{encode, EncodingKey, Header, Algorithm};
+use jsonwebtoken::{Algorithm, EncodingKey, Header, encode};
 use serde::{Deserialize, Serialize};
 use std::path::Path;
 
@@ -41,10 +41,10 @@ enum Commands {
 
 #[derive(Debug, Serialize, Deserialize)]
 struct TokenClaims {
-    sub: String,      // Subject (username)
-    iat: i64,         // Issued at
-    exp: i64,         // Expiry (2099-12-31)
-    iss: String,      // Issuer
+    sub: String, // Subject (username)
+    iat: i64,    // Issued at
+    exp: i64,    // Expiry (2099-12-31)
+    iss: String, // Issuer
 }
 
 fn main() -> Result<()> {
@@ -63,7 +63,10 @@ fn main() -> Result<()> {
 
 fn load_config() -> Result<Ini> {
     if !Path::new(CONFIG_PATH).exists() {
-        anyhow::bail!("Config file not found at: {}\nPlease create it first.", CONFIG_PATH);
+        anyhow::bail!(
+            "Config file not found at: {}\nPlease create it first.",
+            CONFIG_PATH
+        );
     }
     let mut conf = Ini::new();
     conf.load(CONFIG_PATH)
@@ -83,11 +86,12 @@ fn get_jwt_secret(conf: &Ini) -> Result<String> {
 
 fn generate_token(username: &str, secret: &str) -> Result<String> {
     // Token expires on December 31, 2099
-    let exp = Utc.with_ymd_and_hms(2099, 12, 31, 23, 59, 59)
+    let exp = Utc
+        .with_ymd_and_hms(2099, 12, 31, 23, 59, 59)
         .single()
         .expect("Invalid date")
         .timestamp();
-    
+
     let claims = TokenClaims {
         sub: username.to_string(),
         iat: Utc::now().timestamp(),
@@ -99,7 +103,7 @@ fn generate_token(username: &str, secret: &str) -> Result<String> {
     let token = encode(
         &header,
         &claims,
-        &EncodingKey::from_secret(secret.as_bytes())
+        &EncodingKey::from_secret(secret.as_bytes()),
     )?;
 
     Ok(token)
@@ -111,7 +115,10 @@ fn add_user(username: &str) -> Result<()> {
 
     // Check if user already exists
     if conf.get("auth", username).is_some() {
-        anyhow::bail!("User '{}' already exists. Use 'remove' first if you want to regenerate.", username);
+        anyhow::bail!(
+            "User '{}' already exists. Use 'remove' first if you want to regenerate.",
+            username
+        );
     }
 
     // Generate token
@@ -135,17 +142,20 @@ fn add_user(username: &str) -> Result<()> {
 
 fn list_users() -> Result<()> {
     let conf = load_config()?;
-    
-    let auth_map = conf.get_map_ref().get("auth")
+
+    let auth_map = conf
+        .get_map_ref()
+        .get("auth")
         .context("No auth section found in config")?;
 
     println!("📋 Authorized Users:");
     println!();
 
-    let mut users: Vec<_> = auth_map.iter()
+    let mut users: Vec<_> = auth_map
+        .iter()
         .filter(|(k, _)| !k.starts_with('#'))
         .collect();
-    
+
     users.sort_by_key(|(k, _)| *k);
 
     if users.is_empty() {
@@ -186,20 +196,20 @@ fn rotate_secret() -> Result<()> {
     println!("   All users will need new tokens.");
     println!();
     print!("Continue? (yes/no): ");
-    
+
     use std::io::{self, Write};
     io::stdout().flush()?;
-    
+
     let mut input = String::new();
     io::stdin().read_line(&mut input)?;
-    
+
     if input.trim().to_lowercase() != "yes" {
         println!("Cancelled.");
         return Ok(());
     }
 
     let mut conf = load_config()?;
-    
+
     // Generate new secret
     use rand::Rng;
     use rand::distr::Alphanumeric;
@@ -210,17 +220,18 @@ fn rotate_secret() -> Result<()> {
         .collect();
 
     conf.set("server", "jwt_secret", Some(new_secret.clone()));
-    
+
     // Clear all user tokens
-    let users_to_clear: Vec<String> = conf.get_map_ref()
+    let users_to_clear: Vec<String> = conf
+        .get_map_ref()
         .get("auth")
         .map(|m| m.keys().cloned().collect())
         .unwrap_or_default();
-    
+
     for username in users_to_clear {
         conf.set("auth", &username, None);
     }
-    
+
     save_config(&conf)?;
 
     println!("✅ JWT secret rotated successfully!");
@@ -234,8 +245,9 @@ fn rotate_secret() -> Result<()> {
 
 fn show_vscode_config(username: &str) -> Result<()> {
     let conf = load_config()?;
-    
-    let token = conf.get("auth", username)
+
+    let token = conf
+        .get("auth", username)
         .context(format!("User '{}' not found", username))?;
 
     println!("🔧 VS Code Configuration for user '{}':", username);
@@ -246,7 +258,8 @@ fn show_vscode_config(username: &str) -> Result<()> {
 }
 
 fn print_vscode_config(token: &str) {
-    println!(r#"Add this to .vscode/mcp.json:
+    println!(
+        r#"Add this to .vscode/mcp.json:
 
 {{
   "servers": {{
@@ -259,5 +272,7 @@ fn print_vscode_config(token: &str) {
     }}
   }},
   "inputs": []
-}}"#, token);
+}}"#,
+        token
+    );
 }

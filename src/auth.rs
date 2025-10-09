@@ -1,12 +1,7 @@
-use anyhow::{Result, Context};
-use axum::{
-    extract::Request,
-    http::StatusCode,
-    middleware::Next,
-    response::Response,
-};
+use anyhow::{Context, Result};
+use axum::{extract::Request, http::StatusCode, middleware::Next, response::Response};
 use configparser::ini::Ini;
-use jsonwebtoken::{decode, DecodingKey, Validation, Algorithm};
+use jsonwebtoken::{Algorithm, DecodingKey, Validation, decode};
 use serde::{Deserialize, Serialize};
 use std::path::Path;
 
@@ -14,10 +9,10 @@ const CONFIG_PATH: &str = "etc/config.ini";
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TokenClaims {
-    pub sub: String,      // Subject (username)
-    pub iat: i64,         // Issued at
-    pub exp: i64,         // Expiry
-    pub iss: String,      // Issuer
+    pub sub: String, // Subject (username)
+    pub iat: i64,    // Issued at
+    pub exp: i64,    // Expiry
+    pub iss: String, // Issuer
 }
 
 pub struct AuthConfig {
@@ -44,7 +39,7 @@ impl AuthConfig {
             .context("JWT secret not found in config")?;
 
         let mut authorized_tokens = std::collections::HashMap::new();
-        
+
         // Get all keys from auth section
         if let Some(auth_map) = conf.get_map_ref().get("auth") {
             for (username, token) in auth_map.iter() {
@@ -64,9 +59,7 @@ impl AuthConfig {
 
     pub fn verify_token(&self, token: &str) -> Result<TokenClaims> {
         // First check if token exists in authorized list
-        let is_authorized = self.authorized_tokens
-            .values()
-            .any(|t| t == token);
+        let is_authorized = self.authorized_tokens.values().any(|t| t == token);
 
         if !is_authorized {
             anyhow::bail!("Token not in authorized list");

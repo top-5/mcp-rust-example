@@ -1,11 +1,7 @@
-use rmcp::{
-    model::*,
-    transport::StreamableHttpClientTransport,
-    ServiceExt,
-};
-use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
-use clap::Parser;
 use anyhow::Result;
+use clap::Parser;
+use rmcp::{ServiceExt, model::*, transport::StreamableHttpClientTransport};
+use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -47,15 +43,17 @@ async fn main() -> Result<()> {
     };
 
     // Connect to server using the correct pattern
-    let client = client_info.serve(transport).await.map_err(|e| {
-        anyhow::anyhow!("Failed to connect to MCP server: {}", e)
-    })?;
+    let client = client_info
+        .serve(transport)
+        .await
+        .map_err(|e| anyhow::anyhow!("Failed to connect to MCP server: {}", e))?;
 
     tracing::info!("✅ Connected to MCP server!");
 
     // Get server info
     if let Some(server_info) = client.peer_info() {
-        tracing::info!("📋 Server: {} v{}", 
+        tracing::info!(
+            "📋 Server: {} v{}",
             server_info.server_info.name,
             server_info.server_info.version
         );
@@ -67,11 +65,12 @@ async fn main() -> Result<()> {
     // List available tools
     tracing::info!("🔧 Fetching available tools...");
     let tools_result = client.list_tools(Default::default()).await?;
-    
+
     tracing::info!("📋 Available tools ({} total):", tools_result.tools.len());
     for tool in &tools_result.tools {
-        tracing::info!("   - {}: {}", 
-            tool.name, 
+        tracing::info!(
+            "   - {}: {}",
+            tool.name,
             tool.description.as_deref().unwrap_or("No description")
         );
     }
@@ -83,13 +82,15 @@ async fn main() -> Result<()> {
 
     // Test counter operations
     tracing::info!("Testing counter operations...");
-    
+
     // Get initial value
-    let get_result = client.call_tool(CallToolRequestParam {
-        name: "get_counter".into(),
-        arguments: None,
-    }).await?;
-    
+    let get_result = client
+        .call_tool(CallToolRequestParam {
+            name: "get_counter".into(),
+            arguments: None,
+        })
+        .await?;
+
     if let Some(content) = get_result.content.first() {
         if let Some(text) = content.as_text() {
             tracing::info!("📊 {}", text.text);
@@ -99,11 +100,13 @@ async fn main() -> Result<()> {
     // Increment counter
     for i in 1..=3 {
         tracing::info!("Incrementing counter ({})", i);
-        let inc_result = client.call_tool(CallToolRequestParam {
-            name: "increment".into(),
-            arguments: None,
-        }).await?;
-        
+        let inc_result = client
+            .call_tool(CallToolRequestParam {
+                name: "increment".into(),
+                arguments: None,
+            })
+            .await?;
+
         if let Some(content) = inc_result.content.first() {
             if let Some(text) = content.as_text() {
                 tracing::info!("✅ {}", text.text);

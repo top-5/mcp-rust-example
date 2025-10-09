@@ -1,0 +1,1122 @@
+∩╗┐2025-10-09T05:38:39.6296143Z Current runner version: '2.328.0'
+2025-10-09T05:38:39.6319983Z ##[group]Runner Image Provisioner
+2025-10-09T05:38:39.6320810Z Hosted Compute Agent
+2025-10-09T05:38:39.6321388Z Version: 20250912.392
+2025-10-09T05:38:39.6321998Z Commit: d921fda672a98b64f4f82364647e2f10b2267d0b
+2025-10-09T05:38:39.6322683Z Build Date: 2025-09-12T15:23:14Z
+2025-10-09T05:38:39.6323312Z ##[endgroup]
+2025-10-09T05:38:39.6323826Z ##[group]Operating System
+2025-10-09T05:38:39.6324399Z Ubuntu
+2025-10-09T05:38:39.6324906Z 24.04.3
+2025-10-09T05:38:39.6325356Z LTS
+2025-10-09T05:38:39.6325847Z ##[endgroup]
+2025-10-09T05:38:39.6326290Z ##[group]Runner Image
+2025-10-09T05:38:39.6326925Z Image: ubuntu-24.04
+2025-10-09T05:38:39.6327404Z Version: 20250929.60.1
+2025-10-09T05:38:39.6328382Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250929.60/images/ubuntu/Ubuntu2404-Readme.md
+2025-10-09T05:38:39.6330237Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250929.60
+2025-10-09T05:38:39.6331290Z ##[endgroup]
+2025-10-09T05:38:39.6332342Z ##[group]GITHUB_TOKEN Permissions
+2025-10-09T05:38:39.6334281Z Contents: read
+2025-10-09T05:38:39.6334935Z Metadata: read
+2025-10-09T05:38:39.6335520Z Packages: read
+2025-10-09T05:38:39.6336013Z ##[endgroup]
+2025-10-09T05:38:39.6338478Z Secret source: Actions
+2025-10-09T05:38:39.6339135Z Prepare workflow directory
+2025-10-09T05:38:39.6748901Z Prepare all required actions
+2025-10-09T05:38:39.6786960Z Getting action download info
+2025-10-09T05:38:40.0388198Z Download action repository 'actions/checkout@v4' (SHA:08eba0b27e820071cde6df949e0beb9ba4906955)
+2025-10-09T05:38:40.2031618Z Download action repository 'dtolnay/rust-toolchain@stable' (SHA:5d458579430fc14a04a08a1e7d3694f545e91ce6)
+2025-10-09T05:38:40.3347839Z Download action repository 'actions/cache@v4' (SHA:0057852bfaa89a56745cba8c7296529d2fc39830)
+2025-10-09T05:38:40.6008925Z Complete job name: Build and Test
+2025-10-09T05:38:40.6698056Z ##[group]Run actions/checkout@v4
+2025-10-09T05:38:40.6698863Z with:
+2025-10-09T05:38:40.6699290Z   repository: top-5/mcp-rust-example
+2025-10-09T05:38:40.6700093Z   token: ***
+2025-10-09T05:38:40.6700480Z   ssh-strict: true
+2025-10-09T05:38:40.6700865Z   ssh-user: git
+2025-10-09T05:38:40.6701466Z   persist-credentials: true
+2025-10-09T05:38:40.6702056Z   clean: true
+2025-10-09T05:38:40.6702461Z   sparse-checkout-cone-mode: true
+2025-10-09T05:38:40.6702992Z   fetch-depth: 1
+2025-10-09T05:38:40.6703447Z   fetch-tags: false
+2025-10-09T05:38:40.6703884Z   show-progress: true
+2025-10-09T05:38:40.6704321Z   lfs: false
+2025-10-09T05:38:40.6704714Z   submodules: false
+2025-10-09T05:38:40.6705157Z   set-safe-directory: true
+2025-10-09T05:38:40.6706070Z env:
+2025-10-09T05:38:40.6706479Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:40.6706961Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:40.6707385Z ##[endgroup]
+2025-10-09T05:38:40.7770632Z Syncing repository: top-5/mcp-rust-example
+2025-10-09T05:38:40.7772479Z ##[group]Getting Git version info
+2025-10-09T05:38:40.7773239Z Working directory is '/home/runner/work/mcp-rust-example/mcp-rust-example'
+2025-10-09T05:38:40.7774263Z [command]/usr/bin/git version
+2025-10-09T05:38:40.7873801Z git version 2.51.0
+2025-10-09T05:38:40.7900229Z ##[endgroup]
+2025-10-09T05:38:40.7914838Z Temporarily overriding HOME='/home/runner/work/_temp/b8543670-8c8c-4b96-8c79-f9f3c7706899' before making global git config changes
+2025-10-09T05:38:40.7916328Z Adding repository directory to the temporary git global config as a safe directory
+2025-10-09T05:38:40.7927585Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/mcp-rust-example/mcp-rust-example
+2025-10-09T05:38:40.7964577Z Deleting the contents of '/home/runner/work/mcp-rust-example/mcp-rust-example'
+2025-10-09T05:38:40.7967612Z ##[group]Initializing the repository
+2025-10-09T05:38:40.7971725Z [command]/usr/bin/git init /home/runner/work/mcp-rust-example/mcp-rust-example
+2025-10-09T05:38:40.8087720Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-10-09T05:38:40.8089117Z hint: is subject to change. To configure the initial branch name to use in all
+2025-10-09T05:38:40.8090408Z hint: of your new repositories, which will suppress this warning, call:
+2025-10-09T05:38:40.8091074Z hint:
+2025-10-09T05:38:40.8091546Z hint: 	git config --global init.defaultBranch <name>
+2025-10-09T05:38:40.8092111Z hint:
+2025-10-09T05:38:40.8092638Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-10-09T05:38:40.8093511Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-10-09T05:38:40.8094187Z hint:
+2025-10-09T05:38:40.8094559Z hint: 	git branch -m <name>
+2025-10-09T05:38:40.8095113Z hint:
+2025-10-09T05:38:40.8096043Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2025-10-09T05:38:40.8097207Z Initialized empty Git repository in /home/runner/work/mcp-rust-example/mcp-rust-example/.git/
+2025-10-09T05:38:40.8106890Z [command]/usr/bin/git remote add origin https://github.com/top-5/mcp-rust-example
+2025-10-09T05:38:40.8143686Z ##[endgroup]
+2025-10-09T05:38:40.8144390Z ##[group]Disabling automatic garbage collection
+2025-10-09T05:38:40.8147823Z [command]/usr/bin/git config --local gc.auto 0
+2025-10-09T05:38:40.8175517Z ##[endgroup]
+2025-10-09T05:38:40.8176212Z ##[group]Setting up auth
+2025-10-09T05:38:40.8182596Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-10-09T05:38:40.8211900Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-10-09T05:38:40.8559719Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-10-09T05:38:40.8590756Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-10-09T05:38:40.8808154Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-10-09T05:38:40.8849588Z ##[endgroup]
+2025-10-09T05:38:40.8857606Z ##[group]Fetching the repository
+2025-10-09T05:38:40.8860039Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +4a1fff7eb9507cf51bdaeee7ee544729a17c392f:refs/remotes/origin/master
+2025-10-09T05:38:41.0559277Z From https://github.com/top-5/mcp-rust-example
+2025-10-09T05:38:41.0561272Z  * [new ref]         4a1fff7eb9507cf51bdaeee7ee544729a17c392f -> origin/master
+2025-10-09T05:38:41.0594006Z ##[endgroup]
+2025-10-09T05:38:41.0596725Z ##[group]Determining the checkout info
+2025-10-09T05:38:41.0598501Z ##[endgroup]
+2025-10-09T05:38:41.0603662Z [command]/usr/bin/git sparse-checkout disable
+2025-10-09T05:38:41.0644238Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2025-10-09T05:38:41.0674948Z ##[group]Checking out the ref
+2025-10-09T05:38:41.0678764Z [command]/usr/bin/git checkout --progress --force -B master refs/remotes/origin/master
+2025-10-09T05:38:41.0746890Z Reset branch 'master'
+2025-10-09T05:38:41.0750594Z branch 'master' set up to track 'origin/master'.
+2025-10-09T05:38:41.0758990Z ##[endgroup]
+2025-10-09T05:38:41.0794368Z [command]/usr/bin/git log -1 --format=%H
+2025-10-09T05:38:41.0816317Z 4a1fff7eb9507cf51bdaeee7ee544729a17c392f
+2025-10-09T05:38:41.1252262Z ##[group]Run dtolnay/rust-toolchain@stable
+2025-10-09T05:38:41.1253055Z with:
+2025-10-09T05:38:41.1253500Z   components: rustfmt, clippy
+2025-10-09T05:38:41.1254106Z   toolchain: stable
+2025-10-09T05:38:41.1254563Z env:
+2025-10-09T05:38:41.1254962Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:41.1255519Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:41.1255986Z ##[endgroup]
+2025-10-09T05:38:41.1376990Z ##[group]Run : parse toolchain version
+2025-10-09T05:38:41.1377813Z [36;1m: parse toolchain version[0m
+2025-10-09T05:38:41.1378517Z [36;1mif [[ -z $toolchain ]]; then[0m
+2025-10-09T05:38:41.1380053Z [36;1m  # GitHub does not enforce `required: true` inputs itself. https://github.com/actions/runner/issues/1070[0m
+2025-10-09T05:38:41.1381779Z [36;1m  echo "'toolchain' is a required input" >&2[0m
+2025-10-09T05:38:41.1382534Z [36;1m  exit 1[0m
+2025-10-09T05:38:41.1383352Z [36;1melif [[ $toolchain =~ ^stable' '[0-9]+' '(year|month|week|day)s?' 'ago$ ]]; then[0m
+2025-10-09T05:38:41.1384473Z [36;1m  if [[ Linux == macOS ]]; then[0m
+2025-10-09T05:38:41.1385832Z [36;1m    echo "toolchain=1.$((($(date -v-$(sed 's/stable \([0-9]*\) \(.\).*/\1\2/' <<< $toolchain) +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT[0m
+2025-10-09T05:38:41.1387186Z [36;1m  else[0m
+2025-10-09T05:38:41.1388196Z [36;1m    echo "toolchain=1.$((($(date --date "${toolchain#stable }" +%s)/60/60/24-16569)/7/6))" >> $GITHUB_OUTPUT[0m
+2025-10-09T05:38:41.1389409Z [36;1m  fi[0m
+2025-10-09T05:38:41.1390461Z [36;1melif [[ $toolchain =~ ^stable' 'minus' '[0-9]+' 'releases?$ ]]; then[0m
+2025-10-09T05:38:41.1391910Z [36;1m  echo "toolchain=1.$((($(date +%s)/60/60/24-16569)/7/6-${toolchain//[^0-9]/}))" >> $GITHUB_OUTPUT[0m
+2025-10-09T05:38:41.1393155Z [36;1melif [[ $toolchain =~ ^1\.[0-9]+$ ]]; then[0m
+2025-10-09T05:38:41.1394530Z [36;1m  echo "toolchain=1.$((i=${toolchain#1.}, c=($(date +%s)/60/60/24-16569)/7/6, i+9*i*(10*i<=c)+90*i*(100*i<=c)))" >> $GITHUB_OUTPUT[0m
+2025-10-09T05:38:41.1395835Z [36;1melse[0m
+2025-10-09T05:38:41.1396405Z [36;1m  echo "toolchain=$toolchain" >> $GITHUB_OUTPUT[0m
+2025-10-09T05:38:41.1397168Z [36;1mfi[0m
+2025-10-09T05:38:41.1501842Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2025-10-09T05:38:41.1502773Z env:
+2025-10-09T05:38:41.1503178Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:41.1503732Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:41.1504203Z   toolchain: stable
+2025-10-09T05:38:41.1504664Z ##[endgroup]
+2025-10-09T05:38:41.1719633Z ##[group]Run : construct rustup command line
+2025-10-09T05:38:41.1720635Z [36;1m: construct rustup command line[0m
+2025-10-09T05:38:41.1721800Z [36;1mecho "targets=$(for t in ${targets//,/ }; do echo -n ' --target' $t; done)" >> $GITHUB_OUTPUT[0m
+2025-10-09T05:38:41.1723549Z [36;1mecho "components=$(for c in ${components//,/ }; do echo -n ' --component' $c; done)" >> $GITHUB_OUTPUT[0m
+2025-10-09T05:38:41.1724880Z [36;1mecho "downgrade=" >> $GITHUB_OUTPUT[0m
+2025-10-09T05:38:41.1756807Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2025-10-09T05:38:41.1757669Z env:
+2025-10-09T05:38:41.1758090Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:41.1758648Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:41.1759105Z   targets: 
+2025-10-09T05:38:41.1759544Z   components: rustfmt, clippy
+2025-10-09T05:38:41.1760250Z ##[endgroup]
+2025-10-09T05:38:41.1864045Z ##[group]Run : set $CARGO_HOME
+2025-10-09T05:38:41.1864660Z [36;1m: set $CARGO_HOME[0m
+2025-10-09T05:38:41.1865504Z [36;1mecho CARGO_HOME=${CARGO_HOME:-"$HOME/.cargo"} >> $GITHUB_ENV[0m
+2025-10-09T05:38:41.1896076Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2025-10-09T05:38:41.1896940Z env:
+2025-10-09T05:38:41.1897365Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:41.1897907Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:41.1898367Z ##[endgroup]
+2025-10-09T05:38:41.1993357Z ##[group]Run : install rustup if needed
+2025-10-09T05:38:41.1994108Z [36;1m: install rustup if needed[0m
+2025-10-09T05:38:41.1994847Z [36;1mif ! command -v rustup &>/dev/null; then[0m
+2025-10-09T05:38:41.1997058Z [36;1m  curl --proto '=https' --tlsv1.2 --retry 10 --retry-connrefused --location --silent --show-error --fail https://sh.rustup.rs | sh -s -- --default-toolchain none -y[0m
+2025-10-09T05:38:41.1999058Z [36;1m  echo "$CARGO_HOME/bin" >> $GITHUB_PATH[0m
+2025-10-09T05:38:41.1999969Z [36;1mfi[0m
+2025-10-09T05:38:41.2029739Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2025-10-09T05:38:41.2030838Z env:
+2025-10-09T05:38:41.2031251Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:41.2031784Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:41.2032288Z   CARGO_HOME: /home/runner/.cargo
+2025-10-09T05:38:41.2032868Z ##[endgroup]
+2025-10-09T05:38:41.2126979Z ##[group]Run rustup toolchain install stable --component rustfmt --component clippy --profile minimal --no-self-update
+2025-10-09T05:38:41.2129265Z [36;1mrustup toolchain install stable --component rustfmt --component clippy --profile minimal --no-self-update[0m
+2025-10-09T05:38:41.2160692Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2025-10-09T05:38:41.2161557Z env:
+2025-10-09T05:38:41.2161968Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:41.2162496Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:41.2163001Z   CARGO_HOME: /home/runner/.cargo
+2025-10-09T05:38:41.2163591Z ##[endgroup]
+2025-10-09T05:38:42.1052287Z info: syncing channel updates for 'stable-x86_64-unknown-linux-gnu'
+2025-10-09T05:38:42.4442351Z info: latest update on 2025-09-18, rust version 1.90.0 (1159e78c4 2025-09-14)
+2025-10-09T05:38:42.4774681Z info: component 'clippy' for target 'x86_64-unknown-linux-gnu' is up to date
+2025-10-09T05:38:42.4775654Z info: component 'rustfmt' for target 'x86_64-unknown-linux-gnu' is up to date
+2025-10-09T05:38:42.4796892Z 
+2025-10-09T05:38:42.4896580Z   stable-x86_64-unknown-linux-gnu unchanged - rustc 1.90.0 (1159e78c4 2025-09-14)
+2025-10-09T05:38:42.4897155Z 
+2025-10-09T05:38:42.4961454Z ##[group]Run rustup default stable
+2025-10-09T05:38:42.4961787Z [36;1mrustup default stable[0m
+2025-10-09T05:38:42.4996478Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2025-10-09T05:38:42.4996836Z env:
+2025-10-09T05:38:42.4997060Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:42.4997305Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:42.4997540Z   CARGO_HOME: /home/runner/.cargo
+2025-10-09T05:38:42.4997803Z ##[endgroup]
+2025-10-09T05:38:42.5105678Z info: using existing install for 'stable-x86_64-unknown-linux-gnu'
+2025-10-09T05:38:42.5445648Z info: default toolchain set to 'stable-x86_64-unknown-linux-gnu'
+2025-10-09T05:38:42.5446260Z 
+2025-10-09T05:38:42.5539579Z   stable-x86_64-unknown-linux-gnu unchanged - rustc 1.90.0 (1159e78c4 2025-09-14)
+2025-10-09T05:38:42.5540427Z 
+2025-10-09T05:38:42.5591642Z ##[group]Run : create cachekey
+2025-10-09T05:38:42.5591966Z [36;1m: create cachekey[0m
+2025-10-09T05:38:42.5592452Z [36;1mDATE=$(rustc +stable --version --verbose | sed -ne 's/^commit-date: \(20[0-9][0-9]\)-\([01][0-9]\)-\([0-3][0-9]\)$/\1\2\3/p')[0m
+2025-10-09T05:38:42.5593058Z [36;1mHASH=$(rustc +stable --version --verbose | sed -ne 's/^commit-hash: //p')[0m
+2025-10-09T05:38:42.5593565Z [36;1mecho "cachekey=$(echo $DATE$HASH | head -c12)" >> $GITHUB_OUTPUT[0m
+2025-10-09T05:38:42.5628810Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2025-10-09T05:38:42.5629163Z env:
+2025-10-09T05:38:42.5629377Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:42.5629636Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:42.5630085Z   CARGO_HOME: /home/runner/.cargo
+2025-10-09T05:38:42.5630360Z ##[endgroup]
+2025-10-09T05:38:42.6477450Z ##[group]Run : disable incremental compilation
+2025-10-09T05:38:42.6477843Z [36;1m: disable incremental compilation[0m
+2025-10-09T05:38:42.6478174Z [36;1mif [ -z "${CARGO_INCREMENTAL+set}" ]; then[0m
+2025-10-09T05:38:42.6478562Z [36;1m  echo CARGO_INCREMENTAL=0 >> $GITHUB_ENV[0m
+2025-10-09T05:38:42.6478851Z [36;1mfi[0m
+2025-10-09T05:38:42.6514370Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2025-10-09T05:38:42.6514734Z env:
+2025-10-09T05:38:42.6514944Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:42.6515188Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:42.6515666Z   CARGO_HOME: /home/runner/.cargo
+2025-10-09T05:38:42.6515952Z ##[endgroup]
+2025-10-09T05:38:42.6591053Z ##[group]Run : enable colors in Cargo output
+2025-10-09T05:38:42.6591405Z [36;1m: enable colors in Cargo output[0m
+2025-10-09T05:38:42.6591722Z [36;1mif [ -z "${CARGO_TERM_COLOR+set}" ]; then[0m
+2025-10-09T05:38:42.6592069Z [36;1m  echo CARGO_TERM_COLOR=always >> $GITHUB_ENV[0m
+2025-10-09T05:38:42.6592369Z [36;1mfi[0m
+2025-10-09T05:38:42.6624533Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2025-10-09T05:38:42.6624890Z env:
+2025-10-09T05:38:42.6625096Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:42.6625502Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:42.6625731Z   CARGO_HOME: /home/runner/.cargo
+2025-10-09T05:38:42.6626001Z   CARGO_INCREMENTAL: 0
+2025-10-09T05:38:42.6626221Z ##[endgroup]
+2025-10-09T05:38:42.6763369Z ##[group]Run : enable Cargo sparse registry
+2025-10-09T05:38:42.6763787Z [36;1m: enable Cargo sparse registry[0m
+2025-10-09T05:38:42.6764186Z [36;1m# implemented in 1.66, stabilized in 1.68, made default in 1.70[0m
+2025-10-09T05:38:42.6764883Z [36;1mif [ -z "${CARGO_REGISTRIES_CRATES_IO_PROTOCOL+set}" -o -f "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol ]; then[0m
+2025-10-09T05:38:42.6765601Z [36;1m  if rustc +stable --version --verbose | grep -q '^release: 1\.6[89]\.'; then[0m
+2025-10-09T05:38:42.6766163Z [36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true[0m
+2025-10-09T05:38:42.6766688Z [36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse >> $GITHUB_ENV[0m
+2025-10-09T05:38:42.6767189Z [36;1m  elif rustc +stable --version --verbose | grep -q '^release: 1\.6[67]\.'; then[0m
+2025-10-09T05:38:42.6767759Z [36;1m    touch "/home/runner/work/_temp"/.implicit_cargo_registries_crates_io_protocol || true[0m
+2025-10-09T05:38:42.6768265Z [36;1m    echo CARGO_REGISTRIES_CRATES_IO_PROTOCOL=git >> $GITHUB_ENV[0m
+2025-10-09T05:38:42.6768629Z [36;1m  fi[0m
+2025-10-09T05:38:42.6768849Z [36;1mfi[0m
+2025-10-09T05:38:42.6808755Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2025-10-09T05:38:42.6809136Z env:
+2025-10-09T05:38:42.6809354Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:42.6809603Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:42.6810029Z   CARGO_HOME: /home/runner/.cargo
+2025-10-09T05:38:42.6810313Z   CARGO_INCREMENTAL: 0
+2025-10-09T05:38:42.6810549Z ##[endgroup]
+2025-10-09T05:38:42.7199740Z ##[group]Run : work around spurious network errors in curl 8.0
+2025-10-09T05:38:42.7200475Z [36;1m: work around spurious network errors in curl 8.0[0m
+2025-10-09T05:38:42.7201079Z [36;1m# https://rust-lang.zulipchat.com/#narrow/stream/246057-t-cargo/topic/timeout.20investigation[0m
+2025-10-09T05:38:42.7201714Z [36;1mif rustc +stable --version --verbose | grep -q '^release: 1\.7[01]\.'; then[0m
+2025-10-09T05:38:42.7202164Z [36;1m  echo CARGO_HTTP_MULTIPLEXING=false >> $GITHUB_ENV[0m
+2025-10-09T05:38:42.7202479Z [36;1mfi[0m
+2025-10-09T05:38:42.7239454Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2025-10-09T05:38:42.7240015Z env:
+2025-10-09T05:38:42.7240252Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:42.7240499Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:42.7240739Z   CARGO_HOME: /home/runner/.cargo
+2025-10-09T05:38:42.7241028Z   CARGO_INCREMENTAL: 0
+2025-10-09T05:38:42.7241289Z ##[endgroup]
+2025-10-09T05:38:42.7479442Z ##[group]Run rustc +stable --version --verbose
+2025-10-09T05:38:42.7480041Z [36;1mrustc +stable --version --verbose[0m
+2025-10-09T05:38:42.7516807Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2025-10-09T05:38:42.7517152Z env:
+2025-10-09T05:38:42.7517369Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:42.7517630Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:42.7517870Z   CARGO_HOME: /home/runner/.cargo
+2025-10-09T05:38:42.7518128Z   CARGO_INCREMENTAL: 0
+2025-10-09T05:38:42.7518359Z ##[endgroup]
+2025-10-09T05:38:42.7699979Z rustc 1.90.0 (1159e78c4 2025-09-14)
+2025-10-09T05:38:42.7700624Z binary: rustc
+2025-10-09T05:38:42.7701582Z commit-hash: 1159e78c4747b02ef996e55082b704c09b970588
+2025-10-09T05:38:42.7702246Z commit-date: 2025-09-14
+2025-10-09T05:38:42.7702577Z host: x86_64-unknown-linux-gnu
+2025-10-09T05:38:42.7703029Z release: 1.90.0
+2025-10-09T05:38:42.7703335Z LLVM version: 20.1.8
+2025-10-09T05:38:42.8521721Z ##[group]Run actions/cache@v4
+2025-10-09T05:38:42.8522052Z with:
+2025-10-09T05:38:42.8522275Z   path: ~/.cargo/registry
+2025-10-09T05:38:42.8522719Z   key: Linux-cargo-registry-07f2e0fefe57e7b5e557477cd6d325c864f746082e84b29c11a10508b41d1ed1
+2025-10-09T05:38:42.8523233Z   restore-keys: Linux-cargo-registry-
+
+2025-10-09T05:38:42.8523533Z   enableCrossOsArchive: false
+2025-10-09T05:38:42.8523999Z   fail-on-cache-miss: false
+2025-10-09T05:38:42.8524246Z   lookup-only: false
+2025-10-09T05:38:42.8524475Z   save-always: false
+2025-10-09T05:38:42.8524684Z env:
+2025-10-09T05:38:42.8524889Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:42.8525130Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:42.8525360Z   CARGO_HOME: /home/runner/.cargo
+2025-10-09T05:38:42.8525634Z   CARGO_INCREMENTAL: 0
+2025-10-09T05:38:42.8525860Z ##[endgroup]
+2025-10-09T05:38:43.0818950Z Cache not found for input keys: Linux-cargo-registry-07f2e0fefe57e7b5e557477cd6d325c864f746082e84b29c11a10508b41d1ed1, Linux-cargo-registry-
+2025-10-09T05:38:43.1686864Z ##[group]Run actions/cache@v4
+2025-10-09T05:38:43.1687172Z with:
+2025-10-09T05:38:43.1687382Z   path: ~/.cargo/git
+2025-10-09T05:38:43.1687796Z   key: Linux-cargo-git-07f2e0fefe57e7b5e557477cd6d325c864f746082e84b29c11a10508b41d1ed1
+2025-10-09T05:38:43.1688269Z   restore-keys: Linux-cargo-git-
+
+2025-10-09T05:38:43.1688564Z   enableCrossOsArchive: false
+2025-10-09T05:38:43.1688845Z   fail-on-cache-miss: false
+2025-10-09T05:38:43.1689084Z   lookup-only: false
+2025-10-09T05:38:43.1689310Z   save-always: false
+2025-10-09T05:38:43.1689514Z env:
+2025-10-09T05:38:43.1689714Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:43.1690180Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:43.1690417Z   CARGO_HOME: /home/runner/.cargo
+2025-10-09T05:38:43.1690682Z   CARGO_INCREMENTAL: 0
+2025-10-09T05:38:43.1690902Z ##[endgroup]
+2025-10-09T05:38:43.3623721Z Cache not found for input keys: Linux-cargo-git-07f2e0fefe57e7b5e557477cd6d325c864f746082e84b29c11a10508b41d1ed1, Linux-cargo-git-
+2025-10-09T05:38:43.4372962Z ##[group]Run actions/cache@v4
+2025-10-09T05:38:43.4373225Z with:
+2025-10-09T05:38:43.4373391Z   path: target
+2025-10-09T05:38:43.4373759Z   key: Linux-cargo-build-07f2e0fefe57e7b5e557477cd6d325c864f746082e84b29c11a10508b41d1ed1
+2025-10-09T05:38:43.4374192Z   restore-keys: Linux-cargo-build-
+
+2025-10-09T05:38:43.4374445Z   enableCrossOsArchive: false
+2025-10-09T05:38:43.4374666Z   fail-on-cache-miss: false
+2025-10-09T05:38:43.4374889Z   lookup-only: false
+2025-10-09T05:38:43.4375078Z   save-always: false
+2025-10-09T05:38:43.4375244Z env:
+2025-10-09T05:38:43.4375407Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:43.4375604Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:43.4375796Z   CARGO_HOME: /home/runner/.cargo
+2025-10-09T05:38:43.4376018Z   CARGO_INCREMENTAL: 0
+2025-10-09T05:38:43.4376206Z ##[endgroup]
+2025-10-09T05:38:43.6318350Z Cache not found for input keys: Linux-cargo-build-07f2e0fefe57e7b5e557477cd6d325c864f746082e84b29c11a10508b41d1ed1, Linux-cargo-build-
+2025-10-09T05:38:43.6401330Z ##[group]Run rustc --version
+2025-10-09T05:38:43.6401651Z [36;1mrustc --version[0m
+2025-10-09T05:38:43.6401858Z [36;1mcargo --version[0m
+2025-10-09T05:38:43.6402053Z [36;1mrustfmt --version[0m
+2025-10-09T05:38:43.6402267Z [36;1mcargo clippy --version[0m
+2025-10-09T05:38:43.6435628Z shell: /usr/bin/bash -e {0}
+2025-10-09T05:38:43.6435847Z env:
+2025-10-09T05:38:43.6436025Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:43.6436246Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:43.6436443Z   CARGO_HOME: /home/runner/.cargo
+2025-10-09T05:38:43.6436658Z   CARGO_INCREMENTAL: 0
+2025-10-09T05:38:43.6436848Z ##[endgroup]
+2025-10-09T05:38:43.6972226Z rustc 1.90.0 (1159e78c4 2025-09-14)
+2025-10-09T05:38:44.2359751Z cargo 1.90.0 (840b83a10 2025-07-30)
+2025-10-09T05:38:44.6793215Z rustfmt 1.8.0-stable (1159e78c47 2025-09-14)
+2025-10-09T05:38:45.2739690Z clippy 0.1.90 (1159e78c47 2025-09-14)
+2025-10-09T05:38:45.2783349Z ##[group]Run chmod +x scripts/*.sh
+2025-10-09T05:38:45.2783649Z [36;1mchmod +x scripts/*.sh[0m
+2025-10-09T05:38:45.2815177Z shell: /usr/bin/bash -e {0}
+2025-10-09T05:38:45.2815386Z env:
+2025-10-09T05:38:45.2815551Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:45.2815743Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:45.2815929Z   CARGO_HOME: /home/runner/.cargo
+2025-10-09T05:38:45.2816146Z   CARGO_INCREMENTAL: 0
+2025-10-09T05:38:45.2816324Z ##[endgroup]
+2025-10-09T05:38:45.2898351Z ##[group]Run ./scripts/build.sh
+2025-10-09T05:38:45.2898633Z [36;1m./scripts/build.sh[0m
+2025-10-09T05:38:45.2926843Z shell: /usr/bin/bash -e {0}
+2025-10-09T05:38:45.2927053Z env:
+2025-10-09T05:38:45.2927221Z   CARGO_TERM_COLOR: always
+2025-10-09T05:38:45.2927425Z   RUST_BACKTRACE: 1
+2025-10-09T05:38:45.2927615Z   CARGO_HOME: /home/runner/.cargo
+2025-10-09T05:38:45.2927834Z   CARGO_INCREMENTAL: 0
+2025-10-09T05:38:45.2928017Z ##[endgroup]
+2025-10-09T05:38:45.3011771Z =========================================
+2025-10-09T05:38:45.3012225Z Building MCP Rust Server
+2025-10-09T05:38:45.3012591Z =========================================
+2025-10-09T05:38:45.3013136Z Project root: /home/runner/work/mcp-rust-example/mcp-rust-example
+2025-10-09T05:38:45.3502718Z Rust version: rustc 1.90.0 (1159e78c4 2025-09-14)
+2025-10-09T05:38:45.3952666Z Cargo version: cargo 1.90.0 (840b83a10 2025-07-30)
+2025-10-09T05:38:45.3953019Z 
+2025-10-09T05:38:45.3953411Z ≡ƒôï Checking code formatting...
+2025-10-09T05:38:46.6127912Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/launcher.rs:1:
+2025-10-09T05:38:46.6133826Z -use std::process::{Command, Stdio};
+2025-10-09T05:38:46.6134220Z +use clap::Parser;
+2025-10-09T05:38:46.6134480Z  use std::fs::OpenOptions;
+2025-10-09T05:38:46.6134754Z  use std::path::PathBuf;
+2025-10-09T05:38:46.6135000Z -use clap::Parser;
+2025-10-09T05:38:46.6135254Z +use std::process::{Command, Stdio};
+2025-10-09T05:38:46.6135560Z  
+2025-10-09T05:38:46.6135759Z  #[derive(Parser, Debug)]
+2025-10-09T05:38:46.6136029Z  #[command(author, version, about, long_about = None)]
+2025-10-09T05:38:46.6136484Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/launcher.rs:9:
+2025-10-09T05:38:46.6136901Z      /// Action to perform
+2025-10-09T05:38:46.6137111Z      #[arg(value_enum)]
+2025-10-09T05:38:46.6137342Z      action: Action,
+2025-10-09T05:38:46.6137525Z -    
+2025-10-09T05:38:46.6137687Z +
+2025-10-09T05:38:46.6137856Z      /// Port to bind the server to
+2025-10-09T05:38:46.6138139Z      #[arg(short, long, default_value = "8080")]
+2025-10-09T05:38:46.6138411Z      port: u16,
+2025-10-09T05:38:46.6138749Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/launcher.rs:16:
+2025-10-09T05:38:46.6139151Z -    
+2025-10-09T05:38:46.6139302Z +
+2025-10-09T05:38:46.6139472Z      /// Host to bind the server to
+2025-10-09T05:38:46.6139726Z      #[arg(long, default_value = "127.0.0.1")]
+2025-10-09T05:38:46.6140322Z      host: String,
+2025-10-09T05:38:46.6140664Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/launcher.rs:51:
+2025-10-09T05:38:46.6141066Z      }
+2025-10-09T05:38:46.6141222Z  
+2025-10-09T05:38:46.6141686Z      println!("≡ƒÜÇ Starting MCP server in background...");
+2025-10-09T05:38:46.6141983Z -    
+2025-10-09T05:38:46.6142135Z +
+2025-10-09T05:38:46.6142303Z      // Create logs directory
+2025-10-09T05:38:46.6142543Z      std::fs::create_dir_all("logs")?;
+2025-10-09T05:38:46.6142784Z -    
+2025-10-09T05:38:46.6142935Z +
+2025-10-09T05:38:46.6143104Z      // Setup log files
+2025-10-09T05:38:46.6143319Z      let log_file = OpenOptions::new()
+2025-10-09T05:38:46.6143573Z          .create(true)
+2025-10-09T05:38:46.6143931Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/launcher.rs:61:
+2025-10-09T05:38:46.6144345Z          .append(true)
+2025-10-09T05:38:46.6144556Z          .open("logs/mcp-server.log")?;
+2025-10-09T05:38:46.6144795Z -    
+2025-10-09T05:38:46.6144949Z +
+2025-10-09T05:38:46.6145121Z      let err_file = OpenOptions::new()
+2025-10-09T05:38:46.6145368Z          .create(true)
+2025-10-09T05:38:46.6145553Z          .append(true)
+2025-10-09T05:38:46.6145904Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/launcher.rs:68:
+2025-10-09T05:38:46.6146294Z  
+2025-10-09T05:38:46.6146455Z      // Start the server process
+2025-10-09T05:38:46.6146678Z      let mut cmd = Command::new("cargo");
+2025-10-09T05:38:46.6147386Z -    cmd.args(&["run", "--bin", "mcp-server", "--", "--host", &host, "--port", &port.to_string()])
+2025-10-09T05:38:46.6147761Z -        .stdout(Stdio::from(log_file))
+2025-10-09T05:38:46.6148126Z -        .stderr(Stdio::from(err_file))
+2025-10-09T05:38:46.6148353Z -        .stdin(Stdio::null());
+2025-10-09T05:38:46.6148546Z +    cmd.args(&[
+2025-10-09T05:38:46.6148705Z +        "run",
+2025-10-09T05:38:46.6148855Z +        "--bin",
+2025-10-09T05:38:46.6149026Z +        "mcp-server",
+2025-10-09T05:38:46.6149191Z +        "--",
+2025-10-09T05:38:46.6149347Z +        "--host",
+2025-10-09T05:38:46.6149507Z +        &host,
+2025-10-09T05:38:46.6149667Z +        "--port",
+2025-10-09T05:38:46.6150053Z +        &port.to_string(),
+2025-10-09T05:38:46.6150250Z +    ])
+2025-10-09T05:38:46.6150423Z +    .stdout(Stdio::from(log_file))
+2025-10-09T05:38:46.6150664Z +    .stderr(Stdio::from(err_file))
+2025-10-09T05:38:46.6150889Z +    .stdin(Stdio::null());
+2025-10-09T05:38:46.6151071Z  
+2025-10-09T05:38:46.6151211Z      #[cfg(windows)]
+2025-10-09T05:38:46.6151376Z      {
+2025-10-09T05:38:46.6151684Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/launcher.rs:108:
+2025-10-09T05:38:46.6152046Z  
+2025-10-09T05:38:46.6152209Z  fn stop_server() -> anyhow::Result<()> {
+2025-10-09T05:38:46.6152483Z      let pid_file = PathBuf::from("mcp-server.pid");
+2025-10-09T05:38:46.6152721Z -    
+2025-10-09T05:38:46.6152867Z +
+2025-10-09T05:38:46.6153009Z      if !pid_file.exists() {
+2025-10-09T05:38:46.6153471Z          println!("Γ¥î No PID file found. Server might not be running or was started manually.");
+2025-10-09T05:38:46.6153830Z          return Ok(());
+2025-10-09T05:38:46.6154146Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/launcher.rs:124:
+2025-10-09T05:38:46.6154532Z          let output = Command::new("taskkill")
+2025-10-09T05:38:46.6154788Z              .args(&["/F", "/PID", &pid.to_string()])
+2025-10-09T05:38:46.6155023Z              .output()?;
+2025-10-09T05:38:46.6155196Z -        
+2025-10-09T05:38:46.6155342Z +
+2025-10-09T05:38:46.6155495Z          if output.status.success() {
+2025-10-09T05:38:46.6155806Z              println!("Γ£à Server stopped successfully");
+2025-10-09T05:38:46.6156061Z          } else {
+2025-10-09T05:38:46.6156359Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/launcher.rs:138:
+2025-10-09T05:38:46.6156737Z          let output = Command::new("kill")
+2025-10-09T05:38:46.6156977Z              .args(&["-TERM", &pid.to_string()])
+2025-10-09T05:38:46.6157208Z              .output()?;
+2025-10-09T05:38:46.6157376Z -        
+2025-10-09T05:38:46.6157519Z +
+2025-10-09T05:38:46.6157670Z          if output.status.success() {
+2025-10-09T05:38:46.6157968Z              println!("Γ£à Server stopped successfully");
+2025-10-09T05:38:46.6158198Z          } else {
+2025-10-09T05:38:46.6158499Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/launcher.rs:161:
+2025-10-09T05:38:46.6158870Z              let pid = pid_str.trim();
+2025-10-09T05:38:46.6159193Z              println!("≡ƒƒó MCP server is running (PID: {})", pid);
+2025-10-09T05:38:46.6159534Z              println!("   URL: http://127.0.0.1:8080/mcp");
+2025-10-09T05:38:46.6159952Z -            
+2025-10-09T05:38:46.6160123Z +
+2025-10-09T05:38:46.6160282Z              // Check if we can reach the server
+2025-10-09T05:38:46.6160550Z              println!("   Checking connectivity...");
+2025-10-09T05:38:46.6160834Z              match std::process::Command::new("powershell")
+2025-10-09T05:38:46.6161237Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/launcher.rs:192:
+2025-10-09T05:38:46.6161595Z  
+2025-10-09T05:38:46.6161766Z  fn is_server_running() -> anyhow::Result<bool> {
+2025-10-09T05:38:46.6162061Z      let pid_file = PathBuf::from("mcp-server.pid");
+2025-10-09T05:38:46.6162297Z -    
+2025-10-09T05:38:46.6162441Z +
+2025-10-09T05:38:46.6162589Z      if !pid_file.exists() {
+2025-10-09T05:38:46.6162797Z          return Ok(false);
+2025-10-09T05:38:46.6162973Z      }
+2025-10-09T05:38:46.6163268Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/launcher.rs:205:
+2025-10-09T05:38:46.6163797Z          let output = Command::new("tasklist")
+2025-10-09T05:38:46.6164173Z              .args(&["/FI", &format!("PID eq {}", pid), "/FO", "CSV"])
+2025-10-09T05:38:46.6164438Z              .output()?;
+2025-10-09T05:38:46.6164608Z -        
+2025-10-09T05:38:46.6164751Z +
+2025-10-09T05:38:46.6164948Z          let stdout = String::from_utf8_lossy(&output.stdout);
+2025-10-09T05:38:46.6165225Z          Ok(stdout.contains(pid))
+2025-10-09T05:38:46.6165420Z      }
+2025-10-09T05:38:46.6165710Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/launcher.rs:212:
+2025-10-09T05:38:46.6166060Z  
+2025-10-09T05:38:46.6166198Z      #[cfg(not(windows))]
+2025-10-09T05:38:46.6166376Z      {
+2025-10-09T05:38:46.6166538Z -        let output = Command::new("ps")
+2025-10-09T05:38:46.6166858Z -            .args(&["-p", pid])
+2025-10-09T05:38:46.6167088Z -            .output()?;
+2025-10-09T05:38:46.6167258Z -        
+2025-10-09T05:38:46.6167488Z +        let output = Command::new("ps").args(&["-p", pid]).output()?;
+2025-10-09T05:38:46.6167759Z +
+2025-10-09T05:38:46.6167916Z          Ok(output.status.success())
+2025-10-09T05:38:46.6168128Z      }
+2025-10-09T05:38:46.6168266Z  }
+2025-10-09T05:38:46.6168551Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/launcher.rs:222:
+2025-10-09T05:38:46.6168894Z +
+2025-10-09T05:38:46.6194672Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_client.rs:1:
+2025-10-09T05:38:46.6195383Z -use rmcp::{
+2025-10-09T05:38:46.6195682Z -    model::*,
+2025-10-09T05:38:46.6196072Z -    transport::StreamableHttpClientTransport,
+2025-10-09T05:38:46.6196545Z -    ServiceExt,
+2025-10-09T05:38:46.6196824Z -};
+2025-10-09T05:38:46.6197300Z -use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+2025-10-09T05:38:46.6197885Z -use clap::Parser;
+2025-10-09T05:38:46.6198183Z  use anyhow::Result;
+2025-10-09T05:38:46.6198520Z +use clap::Parser;
+2025-10-09T05:38:46.6199016Z +use rmcp::{ServiceExt, model::*, transport::StreamableHttpClientTransport};
+2025-10-09T05:38:46.6199667Z +use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+2025-10-09T05:38:46.6200261Z  
+2025-10-09T05:38:46.6200417Z  #[derive(Parser, Debug)]
+2025-10-09T05:38:46.6200666Z  #[command(author, version, about, long_about = None)]
+2025-10-09T05:38:46.6201082Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_client.rs:47:
+2025-10-09T05:38:46.6201614Z      };
+2025-10-09T05:38:46.6201874Z  
+2025-10-09T05:38:46.6202116Z      // Connect to server using the correct pattern
+2025-10-09T05:38:46.6202583Z -    let client = client_info.serve(transport).await.map_err(|e| {
+2025-10-09T05:38:46.6203100Z -        anyhow::anyhow!("Failed to connect to MCP server: {}", e)
+2025-10-09T05:38:46.6203435Z -    })?;
+2025-10-09T05:38:46.6203723Z +    let client = client_info
+2025-10-09T05:38:46.6204008Z +        .serve(transport)
+2025-10-09T05:38:46.6204288Z +        .await
+2025-10-09T05:38:46.6204596Z +        .map_err(|e| anyhow::anyhow!("Failed to connect to MCP server: {}", e))?;
+2025-10-09T05:38:46.6205099Z  
+2025-10-09T05:38:46.6205443Z      tracing::info!("Γ£à Connected to MCP server!");
+2025-10-09T05:38:46.6205769Z  
+2025-10-09T05:38:46.6206230Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_client.rs:56:
+2025-10-09T05:38:46.6218156Z      // Get server info
+2025-10-09T05:38:46.6218510Z      if let Some(server_info) = client.peer_info() {
+2025-10-09T05:38:46.6219131Z -        tracing::info!("≡ƒôï Server: {} v{}", 
+2025-10-09T05:38:46.6219561Z +        tracing::info!(
+2025-10-09T05:38:46.6220036Z +            "≡ƒôï Server: {} v{}",
+2025-10-09T05:38:46.6220279Z              server_info.server_info.name,
+2025-10-09T05:38:46.6220529Z              server_info.server_info.version
+2025-10-09T05:38:46.6220752Z          );
+2025-10-09T05:38:46.6221063Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_client.rs:67:
+2025-10-09T05:38:46.6221448Z      // List available tools
+2025-10-09T05:38:46.6221948Z      tracing::info!("≡ƒöº Fetching available tools...");
+2025-10-09T05:38:46.6222322Z      let tools_result = client.list_tools(Default::default()).await?;
+2025-10-09T05:38:46.6222735Z -    
+2025-10-09T05:38:46.6222878Z +
+2025-10-09T05:38:46.6223206Z      tracing::info!("≡ƒôï Available tools ({} total):", tools_result.tools.len());
+2025-10-09T05:38:46.6223550Z      for tool in &tools_result.tools {
+2025-10-09T05:38:46.6223795Z -        tracing::info!("   - {}: {}", 
+2025-10-09T05:38:46.6224018Z -            tool.name, 
+2025-10-09T05:38:46.6224212Z +        tracing::info!(
+2025-10-09T05:38:46.6224424Z +            "   - {}: {}",
+2025-10-09T05:38:46.6224619Z +            tool.name,
+2025-10-09T05:38:46.6224888Z              tool.description.as_deref().unwrap_or("No description")
+2025-10-09T05:38:46.6225171Z          );
+2025-10-09T05:38:46.6225317Z      }
+2025-10-09T05:38:46.6225622Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_client.rs:83:
+2025-10-09T05:38:46.6225975Z  
+2025-10-09T05:38:46.6226143Z      // Test counter operations
+2025-10-09T05:38:46.6226395Z      tracing::info!("Testing counter operations...");
+2025-10-09T05:38:46.6226655Z -    
+2025-10-09T05:38:46.6226794Z +
+2025-10-09T05:38:46.6226954Z      // Get initial value
+2025-10-09T05:38:46.6227213Z -    let get_result = client.call_tool(CallToolRequestParam {
+2025-10-09T05:38:46.6227511Z -        name: "get_counter".into(),
+2025-10-09T05:38:46.6227741Z -        arguments: None,
+2025-10-09T05:38:46.6227925Z -    }).await?;
+2025-10-09T05:38:46.6228090Z -    
+2025-10-09T05:38:46.6228245Z +    let get_result = client
+2025-10-09T05:38:46.6228479Z +        .call_tool(CallToolRequestParam {
+2025-10-09T05:38:46.6228732Z +            name: "get_counter".into(),
+2025-10-09T05:38:46.6228963Z +            arguments: None,
+2025-10-09T05:38:46.6229153Z +        })
+2025-10-09T05:38:46.6229303Z +        .await?;
+2025-10-09T05:38:46.6229457Z +
+2025-10-09T05:38:46.6229656Z      if let Some(content) = get_result.content.first() {
+2025-10-09T05:38:46.6230183Z          if let Some(text) = content.as_text() {
+2025-10-09T05:38:46.6230503Z              tracing::info!("≡ƒôè {}", text.text);
+2025-10-09T05:38:46.6230892Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_client.rs:99:
+2025-10-09T05:38:46.6231259Z      // Increment counter
+2025-10-09T05:38:46.6231448Z      for i in 1..=3 {
+2025-10-09T05:38:46.6231666Z          tracing::info!("Incrementing counter ({})", i);
+2025-10-09T05:38:46.6231990Z -        let inc_result = client.call_tool(CallToolRequestParam {
+2025-10-09T05:38:46.6232281Z -            name: "increment".into(),
+2025-10-09T05:38:46.6232511Z -            arguments: None,
+2025-10-09T05:38:46.6232707Z -        }).await?;
+2025-10-09T05:38:46.6232865Z -        
+2025-10-09T05:38:46.6233034Z +        let inc_result = client
+2025-10-09T05:38:46.6233263Z +            .call_tool(CallToolRequestParam {
+2025-10-09T05:38:46.6233516Z +                name: "increment".into(),
+2025-10-09T05:38:46.6233740Z +                arguments: None,
+2025-10-09T05:38:46.6233946Z +            })
+2025-10-09T05:38:46.6234101Z +            .await?;
+2025-10-09T05:38:46.6234277Z +
+2025-10-09T05:38:46.6234466Z          if let Some(content) = inc_result.content.first() {
+2025-10-09T05:38:46.6234753Z              if let Some(text) = content.as_text() {
+2025-10-09T05:38:46.6235083Z                  tracing::info!("Γ£à {}", text.text);
+2025-10-09T05:38:46.6235464Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_client.rs:120:
+2025-10-09T05:38:46.6235831Z  
+2025-10-09T05:38:46.6235965Z      Ok(())
+2025-10-09T05:38:46.6236116Z  }
+2025-10-09T05:38:46.6236252Z +
+2025-10-09T05:38:46.7034189Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:1:
+2025-10-09T05:38:46.7034936Z -use std::sync::Arc;
+2025-10-09T05:38:46.7035254Z -use tokio::sync::Mutex;
+2025-10-09T05:38:46.7035649Z +use axum::{Json, middleware, response::Html};
+2025-10-09T05:38:46.7036090Z +use clap::Parser;
+2025-10-09T05:38:46.7036888Z +use mcp_rust_example::auth::{AuthConfig, auth_middleware};
+2025-10-09T05:38:46.7037434Z  use rmcp::{
+2025-10-09T05:38:46.7037721Z -    model::*,
+2025-10-09T05:38:46.7038236Z +    ServerHandler,
+2025-10-09T05:38:46.7038622Z      handler::server::router::tool::ToolRouter,
+2025-10-09T05:38:46.7039146Z -    transport::streamable_http_server::{StreamableHttpService, session::local::LocalSessionManager},
+2025-10-09T05:38:46.7039719Z -    tool, tool_handler, tool_router, ServerHandler,
+2025-10-09T05:38:46.7040277Z +    model::*,
+2025-10-09T05:38:46.7040478Z +    tool, tool_handler, tool_router,
+2025-10-09T05:38:46.7040757Z +    transport::streamable_http_server::{
+2025-10-09T05:38:46.7041172Z +        StreamableHttpService, session::local::LocalSessionManager,
+2025-10-09T05:38:46.7041508Z +    },
+2025-10-09T05:38:46.7041669Z  };
+2025-10-09T05:38:46.7041954Z -use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+2025-10-09T05:38:46.7042343Z -use clap::Parser;
+2025-10-09T05:38:46.7042571Z -use axum::{response::Html, Json, middleware};
+2025-10-09T05:38:46.7042867Z  use serde_json::json;
+2025-10-09T05:38:46.7043152Z -use mcp_rust_example::auth::{AuthConfig, auth_middleware};
+2025-10-09T05:38:46.7043472Z +use std::sync::Arc;
+2025-10-09T05:38:46.7043677Z +use tokio::sync::Mutex;
+2025-10-09T05:38:46.7044007Z +use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+2025-10-09T05:38:46.7044377Z  
+2025-10-09T05:38:46.7044542Z  #[derive(Parser, Debug)]
+2025-10-09T05:38:46.7044805Z  #[command(author, version, about, long_about = None)]
+2025-10-09T05:38:46.7045264Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:18:
+2025-10-09T05:38:46.7045696Z      /// Port to bind the server to
+2025-10-09T05:38:46.7045967Z      #[arg(short, long, default_value = "8080")]
+2025-10-09T05:38:46.7046227Z      port: u16,
+2025-10-09T05:38:46.7046407Z -    
+2025-10-09T05:38:46.7046566Z +
+2025-10-09T05:38:46.7046741Z      /// Host to bind the server to
+2025-10-09T05:38:46.7047004Z      #[arg(long, default_value = "127.0.0.1")]
+2025-10-09T05:38:46.7047277Z      host: String,
+2025-10-09T05:38:46.7047637Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:46:
+2025-10-09T05:38:46.7048071Z          let mut counter = self.counter.lock().await;
+2025-10-09T05:38:46.7048324Z          *counter += 1;
+2025-10-09T05:38:46.7048519Z          let value = *counter;
+2025-10-09T05:38:46.7048717Z -        
+2025-10-09T05:38:46.7048861Z +
+2025-10-09T05:38:46.7049074Z          Ok(CallToolResult::success(vec![Content::text(format!(
+2025-10-09T05:38:46.7049372Z -            "Counter incremented to: {}", value
+2025-10-09T05:38:46.7049638Z +            "Counter incremented to: {}",
+2025-10-09T05:38:46.7050073Z +            value
+2025-10-09T05:38:46.7050239Z          ))]))
+2025-10-09T05:38:46.7050389Z      }
+2025-10-09T05:38:46.7050531Z  
+2025-10-09T05:38:46.7050823Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:57:
+2025-10-09T05:38:46.7051298Z      pub async fn get_counter(&self) -> Result<CallToolResult, ErrorData> {
+2025-10-09T05:38:46.7051642Z          let counter = self.counter.lock().await;
+2025-10-09T05:38:46.7051888Z          let value = *counter;
+2025-10-09T05:38:46.7052081Z -        
+2025-10-09T05:38:46.7052220Z +
+2025-10-09T05:38:46.7052428Z          Ok(CallToolResult::success(vec![Content::text(format!(
+2025-10-09T05:38:46.7052720Z -            "Current counter value: {}", value
+2025-10-09T05:38:46.7052967Z +            "Current counter value: {}",
+2025-10-09T05:38:46.7053181Z +            value
+2025-10-09T05:38:46.7053345Z          ))]))
+2025-10-09T05:38:46.7053501Z      }
+2025-10-09T05:38:46.7053644Z  
+2025-10-09T05:38:46.7053933Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:68:
+2025-10-09T05:38:46.7054387Z      pub async fn reset_counter(&self) -> Result<CallToolResult, ErrorData> {
+2025-10-09T05:38:46.7054741Z          let mut counter = self.counter.lock().await;
+2025-10-09T05:38:46.7054982Z          *counter = 0;
+2025-10-09T05:38:46.7055310Z -        
+2025-10-09T05:38:46.7055460Z +
+2025-10-09T05:38:46.7055654Z          Ok(CallToolResult::success(vec![Content::text(
+2025-10-09T05:38:46.7056020Z -            "Counter reset to 0".to_string()
+2025-10-09T05:38:46.7056272Z +            "Counter reset to 0".to_string(),
+2025-10-09T05:38:46.7056493Z          )]))
+2025-10-09T05:38:46.7056638Z      }
+2025-10-09T05:38:46.7056782Z  
+2025-10-09T05:38:46.7057070Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:81:
+2025-10-09T05:38:46.7057683Z          context: rmcp::service::RequestContext<rmcp::service::RoleServer>,
+2025-10-09T05:38:46.7058265Z      ) -> Result<CallToolResult, ErrorData> {
+2025-10-09T05:38:46.7059216Z          tracing::info!("≡ƒöö Sampling request initiated - asking LLM to say Hi");
+2025-10-09T05:38:46.7059897Z -        
+2025-10-09T05:38:46.7060147Z +
+2025-10-09T05:38:46.7060434Z          // Request the client to run an LLM completion
+2025-10-09T05:38:46.7060698Z          let response = context
+2025-10-09T05:38:46.7060914Z              .peer
+2025-10-09T05:38:46.7061237Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:103:
+2025-10-09T05:38:46.7061648Z                      speed_priority: Some(0.8),
+2025-10-09T05:38:46.7061908Z                      intelligence_priority: Some(0.7),
+2025-10-09T05:38:46.7062146Z                  }),
+2025-10-09T05:38:46.7062483Z -                system_prompt: Some("You are a helpful assistant testing MCP sampling.".to_string()),
+2025-10-09T05:38:46.7062862Z +                system_prompt: Some(
+2025-10-09T05:38:46.7063166Z +                    "You are a helpful assistant testing MCP sampling.".to_string(),
+2025-10-09T05:38:46.7063459Z +                ),
+2025-10-09T05:38:46.7063684Z                  include_context: Some(ContextInclusion::None),
+2025-10-09T05:38:46.7063955Z                  temperature: Some(0.7),
+2025-10-09T05:38:46.7064190Z                  max_tokens: 150,
+2025-10-09T05:38:46.7064553Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:119:
+2025-10-09T05:38:46.7064918Z                  )
+2025-10-09T05:38:46.7065092Z              })?;
+2025-10-09T05:38:46.7065250Z  
+2025-10-09T05:38:46.7065629Z -        tracing::info!("Γ£à Sampling response received from model: {}", response.model);
+2025-10-09T05:38:46.7065988Z +        tracing::info!(
+2025-10-09T05:38:46.7066271Z +            "Γ£à Sampling response received from model: {}",
+2025-10-09T05:38:46.7066530Z +            response.model
+2025-10-09T05:38:46.7066720Z +        );
+2025-10-09T05:38:46.7066870Z  
+2025-10-09T05:38:46.7067072Z          Ok(CallToolResult::success(vec![Content::text(format!(
+2025-10-09T05:38:46.7067554Z              "≡ƒôí MCP Sampling Test Results:\n\nModel used: {}\nStop reason: {}\n\nResponse:\n{}",
+2025-10-09T05:38:46.7068070Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:126:
+2025-10-09T05:38:46.7068444Z              response.model,
+2025-10-09T05:38:46.7068757Z -            response.stop_reason.unwrap_or_else(|| "unknown".to_string()),
+2025-10-09T05:38:46.7069066Z              response
+2025-10-09T05:38:46.7069260Z +                .stop_reason
+2025-10-09T05:38:46.7069484Z +                .unwrap_or_else(|| "unknown".to_string()),
+2025-10-09T05:38:46.7069731Z +            response
+2025-10-09T05:38:46.7070110Z                  .message
+2025-10-09T05:38:46.7070298Z                  .content
+2025-10-09T05:38:46.7070481Z                  .as_text()
+2025-10-09T05:38:46.7070813Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:159:
+2025-10-09T05:38:46.7071176Z  
+2025-10-09T05:38:46.7071320Z  // Web route handlers
+2025-10-09T05:38:46.7071538Z  async fn home_page() -> Html<&'static str> {
+2025-10-09T05:38:46.7071778Z -    Html(r#"
+2025-10-09T05:38:46.7071945Z +    Html(
+2025-10-09T05:38:46.7072093Z +        r#"
+2025-10-09T05:38:46.7072256Z  <!DOCTYPE html>
+2025-10-09T05:38:46.7072418Z  <html>
+2025-10-09T05:38:46.7072566Z  <head>
+2025-10-09T05:38:46.7073070Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:194:
+2025-10-09T05:38:46.7073579Z      <p><strong>Web Browser:</strong> You're here! Try the endpoints above</p>
+2025-10-09T05:38:46.7074019Z  </body>
+2025-10-09T05:38:46.7074164Z  </html>
+2025-10-09T05:38:46.7074314Z -    "#)
+2025-10-09T05:38:46.7074455Z +    "#,
+2025-10-09T05:38:46.7074602Z +    )
+2025-10-09T05:38:46.7074744Z  }
+2025-10-09T05:38:46.7074893Z  
+2025-10-09T05:38:46.7075093Z  async fn health_check() -> Json<serde_json::Value> {
+2025-10-09T05:38:46.7075508Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:223:
+2025-10-09T05:38:46.7075864Z  }
+2025-10-09T05:38:46.7076006Z  
+2025-10-09T05:38:46.7076178Z  async fn dashboard() -> Html<&'static str> {
+2025-10-09T05:38:46.7076412Z -    Html(r#"
+2025-10-09T05:38:46.7076569Z +    Html(
+2025-10-09T05:38:46.7076714Z +        r#"
+2025-10-09T05:38:46.7076879Z  <!DOCTYPE html>
+2025-10-09T05:38:46.7077041Z  <html>
+2025-10-09T05:38:46.7077189Z  <head>
+2025-10-09T05:38:46.7077490Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:262:
+2025-10-09T05:38:46.7077869Z      </div>
+2025-10-09T05:38:46.7078013Z  </body>
+2025-10-09T05:38:46.7078158Z  </html>
+2025-10-09T05:38:46.7078296Z -    "#)
+2025-10-09T05:38:46.7078445Z +    "#,
+2025-10-09T05:38:46.7078585Z +    )
+2025-10-09T05:38:46.7078733Z  }
+2025-10-09T05:38:46.7078880Z  
+2025-10-09T05:38:46.7079021Z  #[tokio::main]
+2025-10-09T05:38:46.7079335Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:269:
+2025-10-09T05:38:46.7079715Z  async fn main() -> anyhow::Result<()> {
+2025-10-09T05:38:46.7080244Z      let args = Args::parse();
+2025-10-09T05:38:46.7080444Z -    
+2025-10-09T05:38:46.7080595Z +
+2025-10-09T05:38:46.7080743Z      // Initialize logging
+2025-10-09T05:38:46.7080960Z      tracing_subscriber::registry()
+2025-10-09T05:38:46.7081170Z          .with(
+2025-10-09T05:38:46.7081488Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:279:
+2025-10-09T05:38:46.7081862Z          .init();
+2025-10-09T05:38:46.7082019Z  
+2025-10-09T05:38:46.7082236Z      tracing::info!("Starting MCP Rust Example Server...");
+2025-10-09T05:38:46.7082728Z -    tracing::info!("Using official Rust MCP SDK from https://github.com/modelcontextprotocol/rust-sdk");
+2025-10-09T05:38:46.7083139Z +    tracing::info!(
+2025-10-09T05:38:46.7083452Z +        "Using official Rust MCP SDK from https://github.com/modelcontextprotocol/rust-sdk"
+2025-10-09T05:38:46.7083826Z +    );
+2025-10-09T05:38:46.7083968Z  
+2025-10-09T05:38:46.7084139Z      // Load authentication configuration
+2025-10-09T05:38:46.7084413Z      let auth_config = match AuthConfig::load() {
+2025-10-09T05:38:46.7084801Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:286:
+2025-10-09T05:38:46.7085177Z          Ok(config) => {
+2025-10-09T05:38:46.7085659Z -            tracing::info!("≡ƒöÉ Authentication enabled with {} authorized users", config.authorized_tokens.len());
+2025-10-09T05:38:46.7086089Z +            tracing::info!(
+2025-10-09T05:38:46.7086393Z +                "≡ƒöÉ Authentication enabled with {} authorized users",
+2025-10-09T05:38:46.7086699Z +                config.authorized_tokens.len()
+2025-10-09T05:38:46.7086936Z +            );
+2025-10-09T05:38:46.7087109Z              Arc::new(config)
+2025-10-09T05:38:46.7087305Z -        },
+2025-10-09T05:38:46.7087454Z +        }
+2025-10-09T05:38:46.7087619Z          Err(e) => {
+2025-10-09T05:38:46.7088059Z -            tracing::warn!("ΓÜá∩╕Å  Failed to load auth config: {}. Running WITHOUT authentication!", e);
+2025-10-09T05:38:46.7088647Z -            tracing::warn!("ΓÜá∩╕Å  To enable authentication, create etc/config.ini using token-manager");
+2025-10-09T05:38:46.7089019Z +            tracing::warn!(
+2025-10-09T05:38:46.7089367Z +                "ΓÜá∩╕Å  Failed to load auth config: {}. Running WITHOUT authentication!",
+2025-10-09T05:38:46.7089667Z +                e
+2025-10-09T05:38:46.7089989Z +            );
+2025-10-09T05:38:46.7090328Z +            tracing::warn!(
+2025-10-09T05:38:46.7090717Z +                "ΓÜá∩╕Å  To enable authentication, create etc/config.ini using token-manager"
+2025-10-09T05:38:46.7091180Z +            );
+2025-10-09T05:38:46.7091355Z              Arc::new(AuthConfig {
+2025-10-09T05:38:46.7091587Z                  jwt_secret: String::new(),
+2025-10-09T05:38:46.7091873Z                  authorized_tokens: std::collections::HashMap::new(),
+2025-10-09T05:38:46.7092304Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:310:
+2025-10-09T05:38:46.7092749Z      // Note: Avoiding root route "/" to prevent MCP client confusion
+2025-10-09T05:38:46.7093103Z      // MCP routes require authentication, web routes are public
+2025-10-09T05:38:46.7093451Z      let has_auth = !auth_config.authorized_tokens.is_empty();
+2025-10-09T05:38:46.7093713Z -    
+2025-10-09T05:38:46.7093862Z +
+2025-10-09T05:38:46.7094020Z      let mcp_router = if has_auth {
+2025-10-09T05:38:46.7094255Z          axum::Router::new()
+2025-10-09T05:38:46.7094475Z              .nest_service("/mcp", service)
+2025-10-09T05:38:46.7094861Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:317:
+2025-10-09T05:38:46.7095271Z              .layer(middleware::from_fn_with_state(
+2025-10-09T05:38:46.7095520Z                  auth_config.clone(),
+2025-10-09T05:38:46.7095749Z -                auth_middleware
+2025-10-09T05:38:46.7095955Z +                auth_middleware,
+2025-10-09T05:38:46.7096158Z              ))
+2025-10-09T05:38:46.7096314Z      } else {
+2025-10-09T05:38:46.7096485Z -        axum::Router::new()
+2025-10-09T05:38:46.7096693Z -            .nest_service("/mcp", service)
+2025-10-09T05:38:46.7096966Z +        axum::Router::new().nest_service("/mcp", service)
+2025-10-09T05:38:46.7097218Z      };
+2025-10-09T05:38:46.7097359Z  
+2025-10-09T05:38:46.7097524Z      let app = axum::Router::new()
+2025-10-09T05:38:46.7097879Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:327:
+2025-10-09T05:38:46.7098297Z          .route("/health", axum::routing::get(health_check))
+2025-10-09T05:38:46.7098607Z          .route("/api/status", axum::routing::get(api_status))
+2025-10-09T05:38:46.7098919Z          .route("/dashboard", axum::routing::get(dashboard))
+2025-10-09T05:38:46.7099290Z -        .route("/web", axum::routing::get(home_page))  // Move home to /web to avoid conflict
+2025-10-09T05:38:46.7099748Z +        .route("/web", axum::routing::get(home_page)) // Move home to /web to avoid conflict
+2025-10-09T05:38:46.7100365Z          .merge(mcp_router);
+2025-10-09T05:38:46.7100551Z  
+2025-10-09T05:38:46.7100706Z      // Start the server
+2025-10-09T05:38:46.7101042Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:334:
+2025-10-09T05:38:46.7101507Z      let listener = tokio::net::TcpListener::bind(&bind_address).await?;
+2025-10-09T05:38:46.7101803Z -    
+2025-10-09T05:38:46.7102167Z -    tracing::info!("≡ƒÜÇ Combined MCP + Web Server running on http://{}", bind_address);
+2025-10-09T05:38:46.7102510Z +
+2025-10-09T05:38:46.7102656Z +    tracing::info!(
+2025-10-09T05:38:46.7102943Z +        "≡ƒÜÇ Combined MCP + Web Server running on http://{}",
+2025-10-09T05:38:46.7103202Z +        bind_address
+2025-10-09T05:38:46.7103377Z +    );
+2025-10-09T05:38:46.7103588Z      tracing::info!("≡ƒôï MCP Protocol:");
+2025-10-09T05:38:46.7103922Z      tracing::info!("   Endpoint: http://{}/mcp", bind_address);
+2025-10-09T05:38:46.7104275Z      tracing::info!("   Tools: increment, get_counter, reset_counter");
+2025-10-09T05:38:46.7104718Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:352:
+2025-10-09T05:38:46.7105163Z          tracing::info!("   cargo run --bin token-manager add <username>");
+2025-10-09T05:38:46.7105453Z      }
+2025-10-09T05:38:46.7105777Z      tracing::info!("≡ƒÆí VS Code MCP: Already configured as mcp_rustexam_* tools");
+2025-10-09T05:38:46.7106281Z -    tracing::info!("≡ƒÆí Web Browser: Visit http://{}/web for web interface", bind_address);
+2025-10-09T05:38:46.7106760Z +    tracing::info!(
+2025-10-09T05:38:46.7107049Z +        "≡ƒÆí Web Browser: Visit http://{}/web for web interface",
+2025-10-09T05:38:46.7107430Z +        bind_address
+2025-10-09T05:38:46.7107599Z +    );
+2025-10-09T05:38:46.7107753Z      tracing::info!("");
+2025-10-09T05:38:46.7107972Z      tracing::info!("Press Ctrl+C to shutdown");
+2025-10-09T05:38:46.7108203Z  
+2025-10-09T05:38:46.7108502Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/mcp_server.rs:368:
+2025-10-09T05:38:46.7108854Z  
+2025-10-09T05:38:46.7108995Z      Ok(())
+2025-10-09T05:38:46.7109141Z  }
+2025-10-09T05:38:46.7109284Z +
+2025-10-09T05:38:46.7109617Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:1:
+2025-10-09T05:38:46.7110121Z -use anyhow::{Result, Context};
+2025-10-09T05:38:46.7110337Z -use chrono::{Utc, TimeZone};
+2025-10-09T05:38:46.7110554Z +use anyhow::{Context, Result};
+2025-10-09T05:38:46.7110762Z +use chrono::{TimeZone, Utc};
+2025-10-09T05:38:46.7110992Z  use clap::{Parser, Subcommand};
+2025-10-09T05:38:46.7111210Z  use configparser::ini::Ini;
+2025-10-09T05:38:46.7111493Z -use jsonwebtoken::{encode, EncodingKey, Header, Algorithm};
+2025-10-09T05:38:46.7111841Z +use jsonwebtoken::{Algorithm, EncodingKey, Header, encode};
+2025-10-09T05:38:46.7112145Z  use serde::{Deserialize, Serialize};
+2025-10-09T05:38:46.7112377Z  use std::path::Path;
+2025-10-09T05:38:46.7112547Z  
+2025-10-09T05:38:46.7112850Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:41:
+2025-10-09T05:38:46.7113212Z  
+2025-10-09T05:38:46.7113379Z  #[derive(Debug, Serialize, Deserialize)]
+2025-10-09T05:38:46.7113612Z  struct TokenClaims {
+2025-10-09T05:38:46.7113816Z -    sub: String,      // Subject (username)
+2025-10-09T05:38:46.7114053Z -    iat: i64,         // Issued at
+2025-10-09T05:38:46.7114291Z -    exp: i64,         // Expiry (2099-12-31)
+2025-10-09T05:38:46.7114526Z -    iss: String,      // Issuer
+2025-10-09T05:38:46.7114751Z +    sub: String, // Subject (username)
+2025-10-09T05:38:46.7114991Z +    iat: i64,    // Issued at
+2025-10-09T05:38:46.7115199Z +    exp: i64,    // Expiry (2099-12-31)
+2025-10-09T05:38:46.7115437Z +    iss: String, // Issuer
+2025-10-09T05:38:46.7115619Z  }
+2025-10-09T05:38:46.7115764Z  
+2025-10-09T05:38:46.7115919Z  fn main() -> Result<()> {
+2025-10-09T05:38:46.7116273Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:63:
+2025-10-09T05:38:46.7116634Z  
+2025-10-09T05:38:46.7116796Z  fn load_config() -> Result<Ini> {
+2025-10-09T05:38:46.7117032Z      if !Path::new(CONFIG_PATH).exists() {
+2025-10-09T05:38:46.7117396Z -        anyhow::bail!("Config file not found at: {}\nPlease create it first.", CONFIG_PATH);
+2025-10-09T05:38:46.7117744Z +        anyhow::bail!(
+2025-10-09T05:38:46.7117981Z +            "Config file not found at: {}\nPlease create it first.",
+2025-10-09T05:38:46.7118262Z +            CONFIG_PATH
+2025-10-09T05:38:46.7118437Z +        );
+2025-10-09T05:38:46.7118586Z      }
+2025-10-09T05:38:46.7118750Z      let mut conf = Ini::new();
+2025-10-09T05:38:46.7118962Z      conf.load(CONFIG_PATH)
+2025-10-09T05:38:46.7119314Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:83:
+2025-10-09T05:38:46.7119698Z  
+2025-10-09T05:38:46.7120052Z  fn generate_token(username: &str, secret: &str) -> Result<String> {
+2025-10-09T05:38:46.7120375Z      // Token expires on December 31, 2099
+2025-10-09T05:38:46.7120658Z -    let exp = Utc.with_ymd_and_hms(2099, 12, 31, 23, 59, 59)
+2025-10-09T05:38:46.7120921Z +    let exp = Utc
+2025-10-09T05:38:46.7121120Z +        .with_ymd_and_hms(2099, 12, 31, 23, 59, 59)
+2025-10-09T05:38:46.7121357Z          .single()
+2025-10-09T05:38:46.7121531Z          .expect("Invalid date")
+2025-10-09T05:38:46.7121743Z          .timestamp();
+2025-10-09T05:38:46.7122073Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:90:
+2025-10-09T05:38:46.7122444Z -    
+2025-10-09T05:38:46.7122585Z +
+2025-10-09T05:38:46.7122860Z      let claims = TokenClaims {
+2025-10-09T05:38:46.7123075Z          sub: username.to_string(),
+2025-10-09T05:38:46.7123412Z          iat: Utc::now().timestamp(),
+2025-10-09T05:38:46.7123778Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:99:
+2025-10-09T05:38:46.7124157Z      let token = encode(
+2025-10-09T05:38:46.7124339Z          &header,
+2025-10-09T05:38:46.7124496Z          &claims,
+2025-10-09T05:38:46.7124697Z -        &EncodingKey::from_secret(secret.as_bytes())
+2025-10-09T05:38:46.7124980Z +        &EncodingKey::from_secret(secret.as_bytes()),
+2025-10-09T05:38:46.7125225Z      )?;
+2025-10-09T05:38:46.7125365Z  
+2025-10-09T05:38:46.7125508Z      Ok(token)
+2025-10-09T05:38:46.7125825Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:111:
+2025-10-09T05:38:46.7126194Z  
+2025-10-09T05:38:46.7126346Z      // Check if user already exists
+2025-10-09T05:38:46.7126589Z      if conf.get("auth", username).is_some() {
+2025-10-09T05:38:46.7127006Z -        anyhow::bail!("User '{}' already exists. Use 'remove' first if you want to regenerate.", username);
+2025-10-09T05:38:46.7127393Z +        anyhow::bail!(
+2025-10-09T05:38:46.7127675Z +            "User '{}' already exists. Use 'remove' first if you want to regenerate.",
+2025-10-09T05:38:46.7127985Z +            username
+2025-10-09T05:38:46.7128155Z +        );
+2025-10-09T05:38:46.7128300Z      }
+2025-10-09T05:38:46.7128448Z  
+2025-10-09T05:38:46.7128589Z      // Generate token
+2025-10-09T05:38:46.7128931Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:135:
+2025-10-09T05:38:46.7129302Z  
+2025-10-09T05:38:46.7129455Z  fn list_users() -> Result<()> {
+2025-10-09T05:38:46.7129677Z      let conf = load_config()?;
+2025-10-09T05:38:46.7129979Z -    
+2025-10-09T05:38:46.7130168Z -    let auth_map = conf.get_map_ref().get("auth")
+2025-10-09T05:38:46.7130407Z +
+2025-10-09T05:38:46.7130564Z +    let auth_map = conf
+2025-10-09T05:38:46.7130749Z +        .get_map_ref()
+2025-10-09T05:38:46.7130935Z +        .get("auth")
+2025-10-09T05:38:46.7131138Z          .context("No auth section found in config")?;
+2025-10-09T05:38:46.7131388Z  
+2025-10-09T05:38:46.7131603Z      println!("≡ƒôï Authorized Users:");
+2025-10-09T05:38:46.7131990Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:143:
+2025-10-09T05:38:46.7132370Z      println!();
+2025-10-09T05:38:46.7132530Z  
+2025-10-09T05:38:46.7132703Z -    let mut users: Vec<_> = auth_map.iter()
+2025-10-09T05:38:46.7132947Z +    let mut users: Vec<_> = auth_map
+2025-10-09T05:38:46.7133165Z +        .iter()
+2025-10-09T05:38:46.7133344Z          .filter(|(k, _)| !k.starts_with('#'))
+2025-10-09T05:38:46.7133575Z          .collect();
+2025-10-09T05:38:46.7133742Z -    
+2025-10-09T05:38:46.7133891Z +
+2025-10-09T05:38:46.7134043Z      users.sort_by_key(|(k, _)| *k);
+2025-10-09T05:38:46.7134252Z  
+2025-10-09T05:38:46.7134405Z      if users.is_empty() {
+2025-10-09T05:38:46.7134761Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:186:
+2025-10-09T05:38:46.7135177Z      println!("   All users will need new tokens.");
+2025-10-09T05:38:46.7135426Z      println!();
+2025-10-09T05:38:46.7135607Z      print!("Continue? (yes/no): ");
+2025-10-09T05:38:46.7135809Z -    
+2025-10-09T05:38:46.7135953Z +
+2025-10-09T05:38:46.7136106Z      use std::io::{self, Write};
+2025-10-09T05:38:46.7136317Z      io::stdout().flush()?;
+2025-10-09T05:38:46.7136499Z -    
+2025-10-09T05:38:46.7136638Z +
+2025-10-09T05:38:46.7136799Z      let mut input = String::new();
+2025-10-09T05:38:46.7137028Z      io::stdin().read_line(&mut input)?;
+2025-10-09T05:38:46.7137249Z -    
+2025-10-09T05:38:46.7137384Z +
+2025-10-09T05:38:46.7137556Z      if input.trim().to_lowercase() != "yes" {
+2025-10-09T05:38:46.7137799Z          println!("Cancelled.");
+2025-10-09T05:38:46.7138005Z          return Ok(());
+2025-10-09T05:38:46.7138336Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:199:
+2025-10-09T05:38:46.7138826Z      }
+2025-10-09T05:38:46.7138966Z  
+2025-10-09T05:38:46.7139122Z      let mut conf = load_config()?;
+2025-10-09T05:38:46.7139429Z -    
+2025-10-09T05:38:46.7139567Z +
+2025-10-09T05:38:46.7139715Z      // Generate new secret
+2025-10-09T05:38:46.7140044Z      use rand::Rng;
+2025-10-09T05:38:46.7140236Z      use rand::distr::Alphanumeric;
+2025-10-09T05:38:46.7140602Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:210:
+2025-10-09T05:38:46.7140974Z          .collect();
+2025-10-09T05:38:46.7141135Z  
+2025-10-09T05:38:46.7141349Z      conf.set("server", "jwt_secret", Some(new_secret.clone()));
+2025-10-09T05:38:46.7141619Z -    
+2025-10-09T05:38:46.7141764Z +
+2025-10-09T05:38:46.7141911Z      // Clear all user tokens
+2025-10-09T05:38:46.7142164Z -    let users_to_clear: Vec<String> = conf.get_map_ref()
+2025-10-09T05:38:46.7142452Z +    let users_to_clear: Vec<String> = conf
+2025-10-09T05:38:46.7142681Z +        .get_map_ref()
+2025-10-09T05:38:46.7142861Z          .get("auth")
+2025-10-09T05:38:46.7143060Z          .map(|m| m.keys().cloned().collect())
+2025-10-09T05:38:46.7143310Z          .unwrap_or_default();
+2025-10-09T05:38:46.7143663Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:219:
+2025-10-09T05:38:46.7144032Z -    
+2025-10-09T05:38:46.7144172Z +
+2025-10-09T05:38:46.7144338Z      for username in users_to_clear {
+2025-10-09T05:38:46.7144580Z          conf.set("auth", &username, None);
+2025-10-09T05:38:46.7144799Z      }
+2025-10-09T05:38:46.7145108Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:223:
+2025-10-09T05:38:46.7145473Z -    
+2025-10-09T05:38:46.7145617Z +
+2025-10-09T05:38:46.7145768Z      save_config(&conf)?;
+2025-10-09T05:38:46.7145950Z  
+2025-10-09T05:38:46.7146187Z      println!("Γ£à JWT secret rotated successfully!");
+2025-10-09T05:38:46.7146596Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:234:
+2025-10-09T05:38:46.7146955Z  
+2025-10-09T05:38:46.7147154Z  fn show_vscode_config(username: &str) -> Result<()> {
+2025-10-09T05:38:46.7147421Z      let conf = load_config()?;
+2025-10-09T05:38:46.7147615Z -    
+2025-10-09T05:38:46.7147781Z -    let token = conf.get("auth", username)
+2025-10-09T05:38:46.7148000Z +
+2025-10-09T05:38:46.7148146Z +    let token = conf
+2025-10-09T05:38:46.7148320Z +        .get("auth", username)
+2025-10-09T05:38:46.7148565Z          .context(format!("User '{}' not found", username))?;
+2025-10-09T05:38:46.7148816Z  
+2025-10-09T05:38:46.7149091Z      println!("≡ƒöº VS Code Configuration for user '{}':", username);
+2025-10-09T05:38:46.7149533Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:246:
+2025-10-09T05:38:46.7150005Z  }
+2025-10-09T05:38:46.7150147Z  
+2025-10-09T05:38:46.7150307Z  fn print_vscode_config(token: &str) {
+2025-10-09T05:38:46.7150561Z -    println!(r#"Add this to .vscode/mcp.json:
+2025-10-09T05:38:46.7150794Z +    println!(
+2025-10-09T05:38:46.7150982Z +        r#"Add this to .vscode/mcp.json:
+2025-10-09T05:38:46.7151196Z  
+2025-10-09T05:38:46.7151332Z  {{
+2025-10-09T05:38:46.7151479Z    "servers": {{
+2025-10-09T05:38:46.7151803Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/bin/token_manager.rs:259:
+2025-10-09T05:38:46.7152167Z      }}
+2025-10-09T05:38:46.7152313Z    }},
+2025-10-09T05:38:46.7152457Z    "inputs": []
+2025-10-09T05:38:46.7152623Z -}}"#, token);
+2025-10-09T05:38:46.7152788Z +}}"#,
+2025-10-09T05:38:46.7152942Z +        token
+2025-10-09T05:38:46.7153097Z +    );
+2025-10-09T05:38:46.7153238Z  }
+2025-10-09T05:38:46.7153380Z  
+2025-10-09T05:38:46.7344466Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/auth.rs:1:
+2025-10-09T05:38:46.7344978Z -use anyhow::{Result, Context};
+2025-10-09T05:38:46.7345237Z -use axum::{
+2025-10-09T05:38:46.7345457Z -    extract::Request,
+2025-10-09T05:38:46.7345685Z -    http::StatusCode,
+2025-10-09T05:38:46.7345918Z -    middleware::Next,
+2025-10-09T05:38:46.7346157Z -    response::Response,
+2025-10-09T05:38:46.7346380Z -};
+2025-10-09T05:38:46.7346773Z +use anyhow::{Context, Result};
+2025-10-09T05:38:46.7347275Z +use axum::{extract::Request, http::StatusCode, middleware::Next, response::Response};
+2025-10-09T05:38:46.7347921Z  use configparser::ini::Ini;
+2025-10-09T05:38:46.7348242Z -use jsonwebtoken::{decode, DecodingKey, Validation, Algorithm};
+2025-10-09T05:38:46.7348679Z +use jsonwebtoken::{Algorithm, DecodingKey, Validation, decode};
+2025-10-09T05:38:46.7349033Z  use serde::{Deserialize, Serialize};
+2025-10-09T05:38:46.7349294Z  use std::path::Path;
+2025-10-09T05:38:46.7349505Z  
+2025-10-09T05:38:46.7349974Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/auth.rs:14:
+2025-10-09T05:38:46.7350363Z  
+2025-10-09T05:38:46.7350557Z  #[derive(Debug, Clone, Serialize, Deserialize)]
+2025-10-09T05:38:46.7350853Z  pub struct TokenClaims {
+2025-10-09T05:38:46.7351090Z -    pub sub: String,      // Subject (username)
+2025-10-09T05:38:46.7351372Z -    pub iat: i64,         // Issued at
+2025-10-09T05:38:46.7351638Z -    pub exp: i64,         // Expiry
+2025-10-09T05:38:46.7351879Z -    pub iss: String,      // Issuer
+2025-10-09T05:38:46.7352146Z +    pub sub: String, // Subject (username)
+2025-10-09T05:38:46.7352412Z +    pub iat: i64,    // Issued at
+2025-10-09T05:38:46.7352653Z +    pub exp: i64,    // Expiry
+2025-10-09T05:38:46.7352880Z +    pub iss: String, // Issuer
+2025-10-09T05:38:46.7353096Z  }
+2025-10-09T05:38:46.7353245Z  
+2025-10-09T05:38:46.7353415Z  pub struct AuthConfig {
+2025-10-09T05:38:46.7353759Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/auth.rs:44:
+2025-10-09T05:38:46.7354183Z              .context("JWT secret not found in config")?;
+2025-10-09T05:38:46.7354459Z  
+2025-10-09T05:38:46.7354707Z          let mut authorized_tokens = std::collections::HashMap::new();
+2025-10-09T05:38:46.7355035Z -        
+2025-10-09T05:38:46.7355193Z +
+2025-10-09T05:38:46.7355371Z          // Get all keys from auth section
+2025-10-09T05:38:46.7355689Z          if let Some(auth_map) = conf.get_map_ref().get("auth") {
+2025-10-09T05:38:46.7356031Z              for (username, token) in auth_map.iter() {
+2025-10-09T05:38:46.7356441Z Diff in /home/runner/work/mcp-rust-example/mcp-rust-example/src/auth.rs:64:
+2025-10-09T05:38:46.7356814Z  
+2025-10-09T05:38:46.7357060Z      pub fn verify_token(&self, token: &str) -> Result<TokenClaims> {
+2025-10-09T05:38:46.7357431Z          // First check if token exists in authorized list
+2025-10-09T05:38:46.7357757Z -        let is_authorized = self.authorized_tokens
+2025-10-09T05:38:46.7358037Z -            .values()
+2025-10-09T05:38:46.7358240Z -            .any(|t| t == token);
+2025-10-09T05:38:46.7358566Z +        let is_authorized = self.authorized_tokens.values().any(|t| t == token);
+2025-10-09T05:38:46.7358883Z  
+2025-10-09T05:38:46.7359031Z          if !is_authorized {
+2025-10-09T05:38:46.7359274Z              anyhow::bail!("Token not in authorized list");
+2025-10-09T05:38:46.7369184Z Γ¥î Code formatting failed
+2025-10-09T05:38:46.7369518Z Run: cargo fmt
+2025-10-09T05:38:46.7386024Z ##[error]Process completed with exit code 1.
+2025-10-09T05:38:46.7467139Z Post job cleanup.
+2025-10-09T05:38:46.8396457Z [command]/usr/bin/git version
+2025-10-09T05:38:46.8432868Z git version 2.51.0
+2025-10-09T05:38:46.8476971Z Temporarily overriding HOME='/home/runner/work/_temp/40989dc3-072d-461b-a6db-41447b460c3f' before making global git config changes
+2025-10-09T05:38:46.8478247Z Adding repository directory to the temporary git global config as a safe directory
+2025-10-09T05:38:46.8483763Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/mcp-rust-example/mcp-rust-example
+2025-10-09T05:38:46.8524038Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-10-09T05:38:46.8556798Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-10-09T05:38:46.8784657Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-10-09T05:38:46.8805385Z http.https://github.com/.extraheader
+2025-10-09T05:38:46.8818055Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2025-10-09T05:38:46.8848585Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-10-09T05:38:46.9176546Z Cleaning up orphan processes

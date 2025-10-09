@@ -1,7 +1,7 @@
-use std::process::{Command, Stdio};
+use clap::Parser;
 use std::fs::OpenOptions;
 use std::path::PathBuf;
-use clap::Parser;
+use std::process::{Command, Stdio};
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -9,11 +9,11 @@ struct Args {
     /// Action to perform
     #[arg(value_enum)]
     action: Action,
-    
+
     /// Port to bind the server to
     #[arg(short, long, default_value = "8080")]
     port: u16,
-    
+
     /// Host to bind the server to
     #[arg(long, default_value = "127.0.0.1")]
     host: String,
@@ -51,16 +51,16 @@ fn start_server(host: String, port: u16) -> anyhow::Result<()> {
     }
 
     println!("🚀 Starting MCP server in background...");
-    
+
     // Create logs directory
     std::fs::create_dir_all("logs")?;
-    
+
     // Setup log files
     let log_file = OpenOptions::new()
         .create(true)
         .append(true)
         .open("logs/mcp-server.log")?;
-    
+
     let err_file = OpenOptions::new()
         .create(true)
         .append(true)
@@ -68,10 +68,19 @@ fn start_server(host: String, port: u16) -> anyhow::Result<()> {
 
     // Start the server process
     let mut cmd = Command::new("cargo");
-    cmd.args(&["run", "--bin", "mcp-server", "--", "--host", &host, "--port", &port.to_string()])
-        .stdout(Stdio::from(log_file))
-        .stderr(Stdio::from(err_file))
-        .stdin(Stdio::null());
+    cmd.args(&[
+        "run",
+        "--bin",
+        "mcp-server",
+        "--",
+        "--host",
+        &host,
+        "--port",
+        &port.to_string(),
+    ])
+    .stdout(Stdio::from(log_file))
+    .stderr(Stdio::from(err_file))
+    .stdin(Stdio::null());
 
     #[cfg(windows)]
     {
@@ -108,7 +117,7 @@ fn start_server(host: String, port: u16) -> anyhow::Result<()> {
 
 fn stop_server() -> anyhow::Result<()> {
     let pid_file = PathBuf::from("mcp-server.pid");
-    
+
     if !pid_file.exists() {
         println!("❌ No PID file found. Server might not be running or was started manually.");
         return Ok(());
@@ -124,7 +133,7 @@ fn stop_server() -> anyhow::Result<()> {
         let output = Command::new("taskkill")
             .args(&["/F", "/PID", &pid.to_string()])
             .output()?;
-        
+
         if output.status.success() {
             println!("✅ Server stopped successfully");
         } else {
@@ -138,7 +147,7 @@ fn stop_server() -> anyhow::Result<()> {
         let output = Command::new("kill")
             .args(&["-TERM", &pid.to_string()])
             .output()?;
-        
+
         if output.status.success() {
             println!("✅ Server stopped successfully");
         } else {
@@ -161,7 +170,7 @@ fn check_server_status() -> anyhow::Result<()> {
             let pid = pid_str.trim();
             println!("🟢 MCP server is running (PID: {})", pid);
             println!("   URL: http://127.0.0.1:8080/mcp");
-            
+
             // Check if we can reach the server
             println!("   Checking connectivity...");
             match std::process::Command::new("powershell")
@@ -192,7 +201,7 @@ fn check_server_status() -> anyhow::Result<()> {
 
 fn is_server_running() -> anyhow::Result<bool> {
     let pid_file = PathBuf::from("mcp-server.pid");
-    
+
     if !pid_file.exists() {
         return Ok(false);
     }
@@ -205,17 +214,15 @@ fn is_server_running() -> anyhow::Result<bool> {
         let output = Command::new("tasklist")
             .args(&["/FI", &format!("PID eq {}", pid), "/FO", "CSV"])
             .output()?;
-        
+
         let stdout = String::from_utf8_lossy(&output.stdout);
         Ok(stdout.contains(pid))
     }
 
     #[cfg(not(windows))]
     {
-        let output = Command::new("ps")
-            .args(&["-p", pid])
-            .output()?;
-        
+        let output = Command::new("ps").args(&["-p", pid]).output()?;
+
         Ok(output.status.success())
     }
 }
